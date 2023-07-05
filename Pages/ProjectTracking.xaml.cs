@@ -72,30 +72,35 @@ namespace Berichtsheft.Pages {
         public List<Record> records = new List<Record>();
 
         void ReadRecords(string pathToFile=null) {
-            // Foreach node in the XML file
-            XmlDocument xmlDocument = new XmlDocument();
-            if (pathToFile != null ) {
-                // Load the project tracking file from declared path
-                xmlDocument.Load(pathToFile);
-            } else {
-                // Load the project tracking file from the current day
-                xmlDocument.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Berichtsheft\Project tracking\ProjectTracking-" + DateTime.Now.ToString("dd.MM.yyyy") + @".xml");
+            try {
+                // Foreach node in the XML file
+                XmlDocument xmlDocument = new XmlDocument();
+                if (pathToFile != null ) {
+                    // Load the project tracking file from declared path
+                    xmlDocument.Load(pathToFile);
+                } else {
+                    // Load the project tracking file from the current day
+                    xmlDocument.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Berichtsheft\Project tracking\ProjectTracking-" + DateTime.Now.ToString("dd.MM.yyyy") + @".xml");
+                }
+
+                XmlNodeList recordNodes = xmlDocument.SelectNodes("//project");
+
+                // Add the time records to the list
+                foreach (XmlNode recordNode in recordNodes) {
+                    int pos = Convert.ToInt16(recordNode.Attributes["position"].Value);
+                    string name = recordNode.Attributes["name"].Value;
+                    string note = recordNode.Attributes["note"].Value;
+                    string from = recordNode.Attributes["from"].Value;
+                    string to = recordNode.Attributes["to"].Value;
+                    records.Add(new Record(pos, name, note, from, to));
+                }
+
+                // Sort the records by the position attribute
+                records.Sort((x, y) => y.position.CompareTo(x.position));
+            } catch (Exception ex) {
+                Dialogs.ExceptionWindow exceptionWindow = new Dialogs.ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
             }
-
-            XmlNodeList recordNodes = xmlDocument.SelectNodes("//project");
-
-            // Add the time records to the list
-            foreach (XmlNode recordNode in recordNodes) {
-                int pos = Convert.ToInt16(recordNode.Attributes["position"].Value);
-                string name = recordNode.Attributes["name"].Value;
-                string note = recordNode.Attributes["note"].Value;
-                string from = recordNode.Attributes["from"].Value;
-                string to = recordNode.Attributes["to"].Value;
-                records.Add(new Record(pos, name, note, from, to));
-            }
-
-            // Sort the records by the position attribute
-            records.Sort((x, y) => y.position.CompareTo(x.position));
         }
 
         void AddToList() {

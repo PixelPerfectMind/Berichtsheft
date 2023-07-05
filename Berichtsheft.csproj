@@ -73,6 +73,9 @@
     <Compile Include="Dialogs\ExceptionWindow.xaml.cs">
       <DependentUpon>ExceptionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Launch.xaml.cs">
+      <DependentUpon>Launch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\NewProject.xaml.cs">
       <DependentUpon>NewProject.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,12 @@
     <Compile Include="Pages\ProjectTracking.xaml.cs">
       <DependentUpon>ProjectTracking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Setup\VersionExpired.xaml.cs">
+      <DependentUpon>VersionExpired.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Setup\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubMainWIndow.xaml.cs">
       <DependentUpon>SubMainWIndow.xaml</DependentUpon>
     </Compile>
@@ -104,6 +113,10 @@
       <DependentUpon>ProjectTrackingElement.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialogs\ExceptionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Launch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +165,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProjectTracking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Setup\VersionExpired.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Setup\Welcome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
