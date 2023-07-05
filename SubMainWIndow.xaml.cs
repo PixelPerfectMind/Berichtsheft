@@ -29,11 +29,14 @@ namespace Berichtsheft {
             try {
                 if (!System.IO.File.Exists(file)) {
                     XmlDocument xmlDocument = new XmlDocument();
-                    XmlElement root = xmlDocument.CreateElement("workDay");
-                    xmlDocument.AppendChild(root);
+                    XmlNode workDay = xmlDocument.CreateElement("workDay");
+                    xmlDocument.AppendChild(workDay);
                     xmlDocument.Save(file);
                 }
-            } catch { }
+            } catch (Exception ex) {
+                Dialogs.ExceptionWindow exceptionWindow = new Dialogs.ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+            }
         }
 
         public int projectTimerSeconds = 0;
