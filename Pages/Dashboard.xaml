@@ -1,0 +1,35 @@
+﻿<Page x:Class="Berichtsheft.Pages.Dashboard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Berichtsheft.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Foreground="White"
+      Title="Dashboard" FontFamily="{StaticResource EncodeSans}" FontSize="16">
+    <Grid>
+        <TextBlock x:Name="txt_name" Text="Hallo Name!" FontFamily="{StaticResource EncodeSansCondensedBold}" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,24,0,0"/>
+        <TextBlock x:Name="txt_date" Text="Heute ist der 01.01.20**" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,59,0,0"/>
+        <TextBlock Text="Aktuell arbeitest du an diesem Projekt:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,100,0,0"/>
+        <TextBlock Text="Ein Projekt - Seit 9:41 Uhr" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,125,0,0"/>
+        <TextBlock Text="Deine Tagesnotizen:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,210,0,0"/>
+        <StackPanel Orientation="Vertical" Margin="24,242,10,0" Height="159" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <Ellipse Width="20" Height="20" Fill="Green" Margin="0,0,10,0" Stroke="DarkGreen" StrokeThickness="3"/>
+                <TextBlock Text="Hello World-Projektstruktur" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <Ellipse Width="20" Height="20" Fill="#FF9AB8FF" Margin="0,0,10,0" Stroke="#FF7A7AFF" StrokeThickness="3"/>
+                <TextBlock Text="AJAX" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <Ellipse Width="20" Height="20" Fill="Green" Margin="0,0,10,0" Stroke="DarkGreen" StrokeThickness="3"/>
+                <TextBlock Text="Material-Liste" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,406,0,0" >
+            <Button Content="Neu..." Width="70" />
+            <Button Content="Alle Notizen" Width="110"/>
+        </StackPanel>
+    </Grid>
+</Page>

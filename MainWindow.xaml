@@ -1,0 +1,93 @@
+﻿<Window x:Class="Berichtsheft.MainWindow" x:Name="window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:blurView="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
+        xmlns:local="clr-namespace:Berichtsheft"
+        mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16"
+        Title="Berichtsheft" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip">
+    <Border x:Name="brdr_windowBorder" Style="{StaticResource windowBorder}" RenderTransformOrigin="0.5,0.5">
+        <Border.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="windowScale"/>
+            </TransformGroup>
+        </Border.RenderTransform>
+        <Grid>
+            <!-- Grid for the BlurView -->
+            <Grid x:Name="grd_windowInner" Background="#02000000">
+                <Grid MouseDown="grd_windowInner_MouseDown">
+                    <Border Style="{StaticResource titleBar}">
+
+                        <!-- Container for BlurView -->
+                        <Grid>
+                            <!-- Title bar -->
+                            <Grid>
+                                <Image Source="/Resources/Images/berichtsheft.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="6,0,0,0" />
+                                <TextBlock x:Name="txt_windowTitle" Text="Berichtsheft" Style="{StaticResource windowTitleText}" FontFamily="{StaticResource EncodeSansCondensedBold}" MouseDown="txt_windowTitle_MouseDown" />
+                                <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" Click="btn_closeWindow_Click">
+                                    <Button.Triggers>
+                                        <EventTrigger RoutedEvent="Button.Click">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="0" Duration="0:0:0.2" />
+                                                    <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                                <Button x:Name="btn_maximizeWindow" Style="{StaticResource WindowButton}" Margin="0,0,36,0" Content="🗖" VerticalAlignment="Center" Click="btn_maximizeWindow_Click" Padding="1,1,1,1" UseLayoutRounding="True" />
+                                <Button x:Name="btn_minimizeWindow" Style="{StaticResource WindowButton}" Margin="0,0,65,0" Content="🗕" VerticalAlignment="Center" Click="btn_minimizeWindow_Click" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <!-- Navigation bar -->
+                    <Grid x:Name="grd_navBar" Margin="0,37,0,0" Background="#FF00a3ae" Height="50" VerticalAlignment="Top">
+                        <Button x:Name="btn_start" Content="Start" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,0,0,0" Click="btn_start_Click" />
+                        <Button x:Name="btn_allEntries" Content="Alle Einträge" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="70,0,0,0" />
+                        <Button x:Name="btn_allNotes" Content="Alle Notizen" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="180,0,0,0" Click="btn_allNotes_Click" />
+                        <Button x:Name="btn_allProjects" Content="Alle Projekte" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="290,0,0,0" Click="btn_allProjects_Click" />
+                        <Button x:Name="btn_dayHistory" Content="Projekt-Tracking" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="134" Margin="400,0,0,0" Click="btn_dayHistory_Click" />
+                    </Grid>
+
+                    <!-- Content -->
+                    <Frame x:Name="fr_main" Margin="0,87,0,0" NavigationUIVisibility="Hidden" />
+                </Grid>
+            </Grid>
+
+            <!-- Everything above -->
+            <Border x:Name="brdr_contextMenuBorder" Visibility="Collapsed" Background="#02000000" MouseDown="brdr_contextMenuBorder_MouseDown">
+                <Border x:Name="bc_contextMenu" Margin="6,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="162" Height="91">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
+                    </Border.Effect>
+                    <Border ClipToBounds="True">
+                        <blurView:BlurryUserControl BlurContainer="{Binding ElementName=grd_windowInner}"
+                                                BlurRadius="10" Magnification=".1"
+                                                Background="{x:Null}"  >
+                            <blurView:BlurryUserControl.Effect>
+                                <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="15"/>
+                            </blurView:BlurryUserControl.Effect>
+                            <Border CornerRadius="3" Background="#7F00A3AE" BorderBrush="#7F000000" BorderThickness="1">
+
+                            </Border>
+                        </blurView:BlurryUserControl>
+                    </Border>
+                </Border>
+            </Border>
+
+        </Grid>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Window.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="0" To="1" Duration="0:0:0.1" />
+                        <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0" To="1" Duration="0:0:0.1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+    </Border>
+</Window>

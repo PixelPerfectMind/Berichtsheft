@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Berichtsheft.UserControls.ProjectTrackingElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Berichtsheft.UserControls"
+             mc:Ignorable="d" 
+             d:DesignWidth="800" FontFamily="{StaticResource EncodeSans}" FontSize="16">
+    <Border x:Name="brdr_main" Height="100" Style="{StaticResource ManagementViewItemBorder}" Margin="0,0,10,0" Background="{x:Null}" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="img_arrow" Source="/Resources/Images/arrowStart.png" HorizontalAlignment="Left" Width="24"  Margin="10,0,0,0" Stretch="Fill" />
+            <Ellipse x:Name="ell_projectStatus" Margin="10,0,0,0" HorizontalAlignment="Left" Width="24" Height="24" VerticalAlignment="Center" Fill="#FF00A3AE" Stroke="White" StrokeThickness="5" />
+            <TextBlock x:Name="txt_endTime" Text="12:00" ToolTip="Endzeit" VerticalAlignment="Top" Margin="0,21,0,0" Grid.Column="1" Height="20" TextAlignment="Center" />
+            <TextBlock x:Name="txt_startTime" Text="12:00" ToolTip="Startzeit" VerticalAlignment="Top" Margin="0,61,0,0" Grid.Column="1" Height="20" TextAlignment="Center" />
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="10,0,0,0" MaxHeight="90" Grid.Column="2" HorizontalAlignment="Left" >
+                <TextBlock x:Name="txtb_projectName" Text="Platzhalterprojekt" FontFamily="{StaticResource EncodeSansCondensedBold}" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,5"/>
+                <TextBlock x:Name="txtb_projectDescription" Text="Platzhalterbeschreibung" TextWrapping="Wrap" />
+                <CheckBox x:Name="chkb_projectActive" Content="Löschanimation triggern" IsEnabled="False" Visibility="Collapsed"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

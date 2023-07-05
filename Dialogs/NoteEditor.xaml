@@ -1,0 +1,37 @@
+﻿<Window x:Class="Berichtsheft.Dialogs.NoteEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Berichtsheft.Dialogs"
+        mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White"
+        Title="Notiz-Editor" Height="371" Width="320" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True">
+    <StackPanel Orientation="Vertical">
+
+        <!-- Edit options box -->
+        <Border Style="{StaticResource windowBorder}" Height="130" Visibility="Visible">
+            <Grid>
+                <TextBlock Text="Element hinzufügen:" Margin="6,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <TextBlock Text="Notizfarbe:" Margin="6,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Ellipse x:Name="ell_bkgCol_gold" Height="32" Width="32" VerticalAlignment="Bottom" Margin="6,0,260,6" Fill="#dfb200" Stroke="#FFB59000" StrokeThickness="5" Cursor="Hand" ToolTip="Gold" />
+                <Ellipse x:Name="ell_bkgCol_cyan" Height="32" Width="32" VerticalAlignment="Bottom" Margin="43,0,223,6" Fill="#47bed2" Stroke="#FF009AB4" StrokeThickness="5" Cursor="Hand" ToolTip="Türkis" />
+                <Ellipse x:Name="ell_bkgCol_lemongreen" Height="32" Width="32" VerticalAlignment="Bottom" Margin="80,0,186,6" Fill="#9dca53" Stroke="#FF73B800" StrokeThickness="5" Cursor="Hand" ToolTip="Limonengrün" />
+                <Ellipse x:Name="ell_bkgCol_lightpurple" Height="32" Width="32" VerticalAlignment="Bottom" Margin="117,0,149,6" Fill="#f87b8d" Stroke="#FFFF314F" StrokeThickness="5" Cursor="Hand" ToolTip="Rosa" />
+                <Ellipse x:Name="ell_bkgCol_orange" Height="32" Width="32" VerticalAlignment="Bottom" Margin="154,0,112,6" Fill="#e6986a" Stroke="#FFEE6717" StrokeThickness="5" Cursor="Hand" ToolTip="Orange" />
+            </Grid>
+        </Border>
+
+        <!-- Note sheet -->
+        <Border x:Name="brdr_postit" CornerRadius="3" Background="#FFFAE75C" Height="251" Margin="10,0,10,0">
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <TextBlock x:Name="txt_title" Text="Titel" FontFamily="{StaticResource EncodeSans}" FontSize="18" FontWeight="Bold" Margin="0,0,36,0" Foreground="Black" Padding="15,15,5,10" MouseDown="txt_title_MouseDown" />
+                </Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="5,5,5,0">
+                    <StackPanel Orientation="Vertical" x:Name="contents" Height="209" />
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+    </StackPanel>
+</Window>
