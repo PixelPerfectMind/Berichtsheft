@@ -1,0 +1,25 @@
+﻿<Window x:Class="Berichtsheft.Dialogs.Launch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Berichtsheft.Dialogs"
+        mc:Ignorable="d"
+        Title="Start" Height="450" Width="800" AllowsTransparency="True" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        FontFamily="{StaticResource EncodeSans}" FontSize="16" ResizeMode="NoResize" >
+    <Border Style="{StaticResource windowBorder}">
+        <Grid>
+            <Border Style="{StaticResource titleBar}">
+                <Grid>
+                    <TextBlock Style="{StaticResource windowTitleText}" Text="Starten..." />
+                    <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" />
+                    <Button x:Name="btn_maximize" Content="M" Style="{StaticResource WindowButton}" HorizontalAlignment="Left" Margin="719,0,0,0" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+            <Frame x:Name="fr_setup" Margin="0,38,0,59" />
+            <Button x:Name="btn_continue" Content="Überspringen >" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,384,0,0" Width="130" Click="btn_continue_Click"/>
+            <Button x:Name="btn_back" Content="Zurück" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,384,95,0" Width="80"/>
+            <Button x:Name="btn_next" Content="Weiter" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,384,10,0" Width="80"/>
+        </Grid>
+    </Border>
+</Window>

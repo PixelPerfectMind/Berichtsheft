@@ -1,0 +1,27 @@
+﻿<Page x:Class="Berichtsheft.Pages.Setup.Welcome"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Berichtsheft.Pages.Setup"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Willkommen!" Foreground="White" FontFamily="{StaticResource EncodeSans}">
+    <Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,64,0,0">
+            <Image Width="100" Height="100" Margin="10" Source="/Resources/Images/berichtsheft_big.png"/>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock Text="Berichtsheft" FontFamily="{StaticResource EncodeSansCondensedBold}" FontSize="48" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,10,-0.3"/>
+
+                <!-- Version text -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Right">
+                    <TextBlock Text="v." FontSize="12" HorizontalAlignment="Right" Foreground="#7FFFFFFF" FontStyle="Italic"/>
+                    <TextBlock x:Name="txt_version" Text="1.0" FontSize="12" HorizontalAlignment="Right" Foreground="#7FFFFFFF" FontStyle="Italic"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+            <TextBlock Text="Herzlich" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,187,0,0"/>
+            <TextBlock Text="Willkommen!" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,225,0,0"/>
+        
+    </Grid>
+</Page>
