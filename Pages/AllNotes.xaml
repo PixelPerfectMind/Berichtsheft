@@ -7,8 +7,56 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White"
       Title="Alle Notizen">
-    <Grid>
+    <Grid x:Name="grd_main">
         <TextBlock Text="Alle Notizen" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,24,0,0" FontSize="24" FontWeight="Bold"/>
-        <ListBox x:Name="lb_allNotes" Margin="24,59,24,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionChanged="lb_allNotes_SelectionChanged" />
+        <Button x:Name="btn_newNote" Content="Neue Notiz" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,22,24,0" Width="100" Click="btn_newNote_Click"/>
+        <ListBox x:Name="lb_allNotes" Margin="24,61,24,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionChanged="lb_allNotes_SelectionChanged" />
+        <Border x:Name="brdr_newNoteDialog" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" MouseDown="brdr_newNoteDialog_MouseDown" Background="#02000000">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform x:Name="ttrf_newNoteDialogTranslate" />
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Grid Margin="0,44,10,0" HorizontalAlignment="Right" Width="310" Height="160" VerticalAlignment="Top">
+                <Grid.Effect>
+                    <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
+                </Grid.Effect>
+                <Border Height="10" Width="10" Background="#5e5a93" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,58,0" RenderTransformOrigin="0.5,0.5" >
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                </Border>
+                <Border CornerRadius="10" Background="#5e5a93">
+                    <Grid>
+                        <CheckBox x:Name="cb_showNoteCreationDialog" Checked="cb_showNoteCreationDialog_Checked" Unchecked="cb_showNoteCreationDialog_Unchecked" Visibility="Collapsed" IsEnabled="False">
+                            <CheckBox.Triggers>
+                                <EventTrigger RoutedEvent="CheckBox.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ttrf_newNoteDialogTranslate" Storyboard.TargetProperty="(TranslateTransform.Y)" From="60" To="0" Duration="0:0:0.1" />
+                                            <DoubleAnimation Storyboard.TargetName="brdr_newNoteDialog" Storyboard.TargetProperty="(Border.Opacity)" From="0" To="1" Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="CheckBox.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ttrf_newNoteDialogTranslate" Storyboard.TargetProperty="(TranslateTransform.Y)" From="0" To="-60" Duration="0:0:0.1" />
+                                            <DoubleAnimation Storyboard.TargetName="brdr_newNoteDialog" Storyboard.TargetProperty="(Border.Opacity)" From="1" To="0" Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </CheckBox.Triggers>
+                        </CheckBox>
+                        <TextBlock Text="Neue Notiz" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="20" FontWeight="Bold"/>
+                        <TextBox x:Name="txt_newNoteName" VerticalAlignment="Top" Margin="10,40,10,0" TextWrapping="Wrap" FontSize="16" Foreground="White" Height="34" Padding="4,4,0,0" TextChanged="txt_newNoteName_TextChanged"/>
+                        <TextBlock x:Name="txt_forbiddenCharacters" Text="Der Notizname darf nicht leer sein" VerticalAlignment="Top" TextWrapping="Wrap" Margin="10,79,10,0" FontSize="12" Foreground="#FFFF8282"/>
+                        <Button x:Name="btn_createNote" Content="Erstellen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="100" Click="btn_createNote_Click"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
