@@ -51,10 +51,9 @@ namespace Berichtsheft {
         private void brdr_minimized_MouseDown(object sender, MouseButtonEventArgs e) {
             if(chkbox_minimized.IsChecked == true) {
                 chkbox_minimized.IsChecked = false;
-                brdr_smallWindow.Visibility = Visibility.Collapsed;
+                cb_showMiniWindow.IsChecked = false;
             } else {
                 chkbox_minimized.IsChecked = true;
-                brdr_smallWindow.Visibility = Visibility.Visible;
             }
         }
 

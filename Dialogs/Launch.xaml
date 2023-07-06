@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft.Dialogs"
         mc:Ignorable="d"
-        Title="Start" Height="450" Width="800" AllowsTransparency="True" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen"
-        FontFamily="{StaticResource EncodeSans}" FontSize="16" ResizeMode="NoResize" >
+        Title="Anwendung vorbereiten" Height="450" Width="800" AllowsTransparency="True" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        FontFamily="{StaticResource EncodeSans}" FontSize="16" ResizeMode="NoResize" Icon="/Resources/Images/berichtsheft.png" >
     <Border Style="{StaticResource windowBorder}" RenderTransformOrigin="0.5,0.5">
         <Border.RenderTransform>
             <TransformGroup>
@@ -16,7 +16,7 @@
         <Grid>
             <Border Style="{StaticResource titleBar}">
                 <Grid>
-                    <TextBlock Style="{StaticResource windowTitleText}" Text="Starten..." />
+                    <TextBlock Style="{StaticResource windowTitleText}" Text="Anwendung vorbereiten" MouseDown="TextBlock_MouseDown" />
                     <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" Click="btn_closeWindow_Click">
                         <Button.Triggers>
                             <EventTrigger RoutedEvent="Button.Click">
@@ -29,8 +29,6 @@
                             </EventTrigger>
                         </Button.Triggers>
                     </Button>
-                    <Button x:Name="btn_maximizeWindow" Style="{StaticResource WindowButton}" Margin="0,0,36,0" Content="🗖" VerticalAlignment="Center" Padding="1,1,1,1" UseLayoutRounding="True" />
-                    <Button x:Name="btn_minimizeWindow" Style="{StaticResource WindowButton}" Margin="0,0,65,0" Content="🗕" VerticalAlignment="Center" />
                 </Grid>
             </Border>
             <Frame x:Name="fr_setup" Margin="0,38,0,49" NavigationUIVisibility="Hidden" />

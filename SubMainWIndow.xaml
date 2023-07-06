@@ -8,7 +8,7 @@
         Title="Berichtsheft embedded window" Background="{x:Null}" MaxHeight="260" MaxWidth="220" MinHeight="260" MinWidth="220" FontFamily="{StaticResource EncodeSans}" WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="False" AllowsTransparency="True" Topmost="True">
     <StackPanel x:Name="sp_main" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
-        <Border x:Name="brdr_smallWindow" Visibility="Visible" Style="{StaticResource windowBorder}" Height="133" RenderTransformOrigin="0.5,0.5">
+        <Border x:Name="brdr_smallWindow" Visibility="Collapsed" Style="{StaticResource windowBorder}" Height="133" RenderTransformOrigin="0.5,0.5">
             <Border.Effect>
                 <DropShadowEffect Direction="270" BlurRadius="10" ShadowDepth="2"/>
             </Border.Effect>
@@ -61,7 +61,7 @@
             </Image>
         </Border>
 
-        <Border x:Name="brdr_smallMenu" Background="#FF007B85" CornerRadius="10,0,0,0" RenderTransformOrigin="0.5,1">
+        <Border x:Name="brdr_smallMenu" Visibility="Collapsed" Background="#FF007B85" CornerRadius="10,0,0,0" RenderTransformOrigin="0.5,1">
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="sctr_smallMenu"/>
