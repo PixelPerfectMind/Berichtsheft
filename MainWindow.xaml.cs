@@ -128,5 +128,13 @@ namespace Berichtsheft {
                 fr_main.Content = new AllNotes();
             }
         }
+
+        private void window_SizeChanged(object sender, SizeChangedEventArgs e) {
+            if(this.Height >= this.Width) {
+                blr_backgroundImage.Radius = 6000 / this.Width;
+            } else if(this.Width >= this.Height) {
+                blr_backgroundImage.Radius = 6000 / this.Height;
+            }
+        }
     }
 }

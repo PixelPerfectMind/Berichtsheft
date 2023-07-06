@@ -5,27 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft.Dialogs"
         mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White"
-        Title="Notiz-Editor" Height="371" Width="320" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True">
+        Title="Notiz-Editor" Height="441" Width="320" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True">
     <StackPanel Orientation="Vertical">
-
         <!-- Edit options box -->
-        <Border Style="{StaticResource windowBorder}" Height="130" Visibility="Visible">
+        <Border x:Name="brdr_editor" Style="{StaticResource windowBorder}" Height="130" RenderTransformOrigin="0.5,0">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="sctr_editor"/>
+                </TransformGroup>
+            </Border.RenderTransform>
             <Grid>
+                <Button x:Name="btn_closeEditor" Content="🗙" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22" Margin="0,4,4,0" Padding="1,0,1,0" Background="{x:Null}" Width="22" Click="btn_closeEditor_Click" />
+                <CheckBox x:Name="cb_editorVisible" Checked="cb_editorVisible_Checked" Unchecked="cb_editorVisible_Unchecked" Visibility="Collapsed" IsEnabled="False">
+                    <CheckBox.Triggers>
+                        <EventTrigger RoutedEvent="CheckBox.Checked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="sctr_editor" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0" To="1" Duration="0:0:0.07" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="CheckBox.Unchecked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="sctr_editor" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.07" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </CheckBox.Triggers>
+                </CheckBox>
+
                 <TextBlock Text="Element hinzufügen:" Margin="6,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Button x:Name="btn_addText" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="6,30,0,0" Padding="1,0,1,0" Background="{x:Null}" Width="30" Click="btn_addText_Click">
+                    <Image Source="/Resources/Icons/abc.png" Height="24" />
+                </Button>
+
                 <TextBlock Text="Notizfarbe:" Margin="6,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <Ellipse x:Name="ell_bkgCol_gold" Height="32" Width="32" VerticalAlignment="Bottom" Margin="6,0,260,6" Fill="#dfb200" Stroke="#FFB59000" StrokeThickness="5" Cursor="Hand" ToolTip="Gold" />
-                <Ellipse x:Name="ell_bkgCol_cyan" Height="32" Width="32" VerticalAlignment="Bottom" Margin="43,0,223,6" Fill="#47bed2" Stroke="#FF009AB4" StrokeThickness="5" Cursor="Hand" ToolTip="Türkis" />
-                <Ellipse x:Name="ell_bkgCol_lemongreen" Height="32" Width="32" VerticalAlignment="Bottom" Margin="80,0,186,6" Fill="#9dca53" Stroke="#FF73B800" StrokeThickness="5" Cursor="Hand" ToolTip="Limonengrün" />
-                <Ellipse x:Name="ell_bkgCol_lightpurple" Height="32" Width="32" VerticalAlignment="Bottom" Margin="117,0,149,6" Fill="#f87b8d" Stroke="#FFFF314F" StrokeThickness="5" Cursor="Hand" ToolTip="Rosa" />
-                <Ellipse x:Name="ell_bkgCol_orange" Height="32" Width="32" VerticalAlignment="Bottom" Margin="154,0,112,6" Fill="#e6986a" Stroke="#FFEE6717" StrokeThickness="5" Cursor="Hand" ToolTip="Orange" />
+                <Ellipse x:Name="ell_bkgCol_gold" Height="32" Width="32" VerticalAlignment="Bottom" Margin="6,0,260,6" Fill="#dfb200" Stroke="#FFB59000" StrokeThickness="5" Cursor="Hand" ToolTip="Gold" MouseDown="ell_bkgCol_gold_MouseDown" />
+                <Ellipse x:Name="ell_bkgCol_cyan" Height="32" Width="32" VerticalAlignment="Bottom" Margin="43,0,223,6" Fill="#47bed2" Stroke="#FF009AB4" StrokeThickness="5" Cursor="Hand" ToolTip="Türkis" MouseDown="ell_bkgCol_cyan_MouseDown" />
+                <Ellipse x:Name="ell_bkgCol_lemongreen" Height="32" Width="32" VerticalAlignment="Bottom" Margin="80,0,186,6" Fill="#9dca53" Stroke="#FF73B800" StrokeThickness="5" Cursor="Hand" ToolTip="Limonengrün" MouseDown="ell_bkgCol_lemongreen_MouseDown" />
+                <Ellipse x:Name="ell_bkgCol_lightpurple" Height="32" Width="32" VerticalAlignment="Bottom" Margin="117,0,149,6" Fill="#f87b8d" Stroke="#FFFF314F" StrokeThickness="5" Cursor="Hand" ToolTip="Rosa" MouseDown="ell_bkgCol_lightpurple_MouseDown" />
+                <Ellipse x:Name="ell_bkgCol_orange" Height="32" Width="32" VerticalAlignment="Bottom" Margin="154,0,112,6" Fill="#e6986a" Stroke="#FFEE6717" StrokeThickness="5" Cursor="Hand" ToolTip="Orange" MouseDown="ell_bkgCol_orange_MouseDown" />
             </Grid>
         </Border>
 
         <!-- Note sheet -->
-        <Border x:Name="brdr_postit" CornerRadius="3" Background="#FFFAE75C" Height="251" Margin="10,0,10,0">
+        <Border x:Name="brdr_postit" CornerRadius="3" Background="#FFFAE75C" Height="261" Margin="10,0,10,0">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.5" ShadowDepth="2" Direction="270" BlurRadius="8"/>
+            </Border.Effect>
             <StackPanel Orientation="Vertical">
                 <Grid>
-                    <TextBlock x:Name="txt_title" Text="Titel" FontFamily="{StaticResource EncodeSans}" FontSize="18" FontWeight="Bold" Margin="0,0,36,0" Foreground="Black" Padding="15,15,5,10" MouseDown="txt_title_MouseDown" />
+                    <TextBlock x:Name="txt_title" Text="Titel" FontFamily="{StaticResource EncodeSans}" FontSize="18" FontWeight="Bold" Foreground="Black" Padding="15,15,5,10" MouseDown="txt_title_MouseDown" />
+                    <Button x:Name="btn_openEditor" Content="✎" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,36,0" Padding="1,0,1,0" Background="{x:Null}" Width="22" Click="btn_openEditor_Click" Foreground="Black" />
+                    <Button x:Name="btn_closeNote" Content="🗙" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,9,0" Style="{StaticResource closeWindowButton}" Width="22" Foreground="Black" Background="{x:Null}" Click="btn_closeNote_Click" />
                 </Grid>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="5,5,5,0">
                     <StackPanel Orientation="Vertical" x:Name="contents" Height="209" />
