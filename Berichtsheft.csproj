@@ -94,6 +94,9 @@
     <Compile Include="Pages\ProjectTracking.xaml.cs">
       <DependentUpon>ProjectTracking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Setup\Tutorial.xaml.cs">
+      <DependentUpon>Tutorial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Setup\VersionExpired.xaml.cs">
       <DependentUpon>VersionExpired.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProjectTracking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Setup\Tutorial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -268,6 +275,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\lightbulb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\lookHere.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\abc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Backgrounds\blossoms.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Backgrounds\geysir.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Backgrounds\waterfall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Backgrounds\godafoss-waterfall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
