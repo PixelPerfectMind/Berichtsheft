@@ -20,7 +20,7 @@
             <Grid Margin="0,37,0,0">
                 <TextBlock Text="Gib eine Notiz ein. Sie wird in der Projektnachverfolgungs-ansicht erscheinen. Die Notiz kann auch leer gelassen werden." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap"/>
                 <Image Source="/Resources/Icons/lightbulb.png" Width="18" Height="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,75,0,0" />
-                <TextBox x:Name="tb_noteText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10,98,8,49"/>
+                <TextBox x:Name="tb_noteText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10,98,8,49" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,8,10" VerticalAlignment="Bottom">
                     <Button x:Name="btn_continue" Content="OK" Margin="5,0,0,0" Click="OkButton_Click" Width="50"/>
                 </StackPanel>
