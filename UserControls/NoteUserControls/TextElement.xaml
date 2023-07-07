@@ -21,6 +21,6 @@
             </Border.Background>
         </Border>
         <TextBlock x:Name="txt" Foreground="Black" FontFamily="{StaticResource EncodeSans}" Text="Leerer Text" Margin="0,1,5,1" TextWrapping="Wrap" />
-        <Button x:Name="btn_edit" Content="Bearbeiten" VerticalAlignment="Center" Height="18" Width="80" Margin="195,0,0,0" Visibility="Collapsed" HorizontalAlignment="Left" />
+        <Button x:Name="btn_edit" Content="Bearbeiten" VerticalAlignment="Center" Height="18" Width="80" Margin="195,0,0,0" Visibility="Collapsed" HorizontalAlignment="Left" Click="btn_edit_Click" />
     </Grid>
 </UserControl>

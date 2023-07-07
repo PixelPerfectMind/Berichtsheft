@@ -92,5 +92,12 @@ namespace Berichtsheft.UserControls.NoteUserControls {
             btn_edit.Visibility = Visibility.Collapsed;
             brdr_highlight.Visibility = Visibility.Collapsed;
         }
+
+        private void btn_edit_Click(object sender, RoutedEventArgs e)  {
+            Dialogs.Notes.EditTextNoteProperty editTextNoteProperty = new Dialogs.Notes.EditTextNoteProperty();
+            editTextNoteProperty.txt_textContent.Text = txt.Text;
+            editTextNoteProperty.txt_textSize.Text = txt.FontSize.ToString();
+            editTextNoteProperty.Show();
+        }
     }
 }

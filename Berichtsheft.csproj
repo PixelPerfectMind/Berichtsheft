@@ -85,6 +85,9 @@
     <Compile Include="Dialogs\NotesInput.xaml.cs">
       <DependentUpon>NotesInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Notes\EditTextNoteProperty.xaml.cs">
+      <DependentUpon>EditTextNoteProperty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ProjectPicker.xaml.cs">
       <DependentUpon>ProjectPicker.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\NotesInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Notes\EditTextNoteProperty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
