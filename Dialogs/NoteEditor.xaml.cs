@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Xml;
 using TextElement = Berichtsheft.UserControls.NoteUserControls.TextElement;
 
@@ -34,10 +27,9 @@ namespace Berichtsheft.Dialogs {
             brdr_editor.Visibility = Visibility.Collapsed;
 
             try {
+                TriggerNoteRerendering();
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(file);
-                ExtractSpanNodesFromXML(xmlDocument);
-
                 XmlNodeList noteNote = xmlDocument.SelectNodes("/note");
                 foreach (XmlNode noteNode in noteNote) {
                     id = Convert.ToInt32(noteNode.Attributes["id"].Value);
@@ -47,6 +39,12 @@ namespace Berichtsheft.Dialogs {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
                 exceptionWindow.ShowDialog();
             }
+        }
+
+        private void TriggerNoteRerendering() {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(file);
+            ExtractSpanNodesFromXML(xmlDocument);
         }
 
         public void ExtractSpanNodesFromXML(XmlDocument xmlDocument) {
@@ -112,27 +110,62 @@ namespace Berichtsheft.Dialogs {
 
         private void btn_closeNote_Click(object sender, RoutedEventArgs e) { Close(); }
 
-        private void btn_addText_Click(object sender, RoutedEventArgs e)
-        {
-            XmlDocument noteXML = new XmlDocument();
-            noteXML.Load(file);
-            //new xml node
-            XmlElement span = noteXML.CreateElement("span");
-            span.InnerText = "test";
+        private void btn_addText_Click(object sender, RoutedEventArgs e) {
+            try {
+                //Create XML node
+                XmlDocument noteXML = new XmlDocument(); // New XML document
+                noteXML.Load(file); // Load the XML file
+                XmlElement span = noteXML.CreateElement("span"); // Create a new span node
+                span.InnerText = "Notiztext"; // Set text value
 
-            XmlAttribute id = noteXML.CreateAttribute("id");
-            id.Value = "0";
-            //new xml attribute
+                // Create new xml attribute
+                XmlAttribute id = noteXML.CreateAttribute("id");
 
-            span.Attributes.Append(id);
+                int newId = getLastNoteId() + 1;
 
-            noteXML.DocumentElement.AppendChild(span);
-            noteXML.Save(file);
+                id.Value = newId.ToString();
 
+                // Append the attributes to the span node
+                span.Attributes.Append(id);
+                noteXML.DocumentElement.AppendChild(span);
 
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(file);
-            ExtractSpanNodesFromXML(xmlDocument);
+                noteXML.Save(file); // Save the XML file
+
+                TriggerNoteRerendering();
+            } catch (Exception ex) {
+                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+            }
+        }
+
+        public int getLastNoteId() {
+            try {
+                // Load the XML file
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(file);
+
+                // Get all span nodes
+                XmlNodeList spanNodes = xmlDocument.SelectNodes("//span");
+
+                // Temp work variable
+                int lastId = 0;
+
+                // Loop through all span nodes
+                foreach (XmlNode spanNode in spanNodes) {
+                    int id = Convert.ToInt32(spanNode.Attributes["id"].Value);
+                    if (id > lastId) {
+                        // If the current id is greater than the last id, set the lastId to the current id
+                        lastId = id;
+                    }
+                }
+                MessageBox.Show(lastId.ToString());
+                return lastId;
+            }
+            catch (Exception ex) {
+                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+                return 0;
+            }
         }
 
         public void AnimateColorChange(string newColor= "#FFFAE75C") {
@@ -145,7 +178,7 @@ namespace Berichtsheft.Dialogs {
             ColorAnimation colorAnimation = new ColorAnimation();
             colorAnimation.From = initialColor.Color;
             colorAnimation.To = (Color)ColorConverter.ConvertFromString(newColor);
-            colorAnimation.Duration = TimeSpan.FromSeconds(1);  // Replace 2 with the duration of the animation in seconds
+            colorAnimation.Duration = TimeSpan.FromSeconds(0.25);  // Replace 2 with the duration of the animation in seconds
 
             // Apply the animation to the border's Background property
             Storyboard.SetTarget(colorAnimation, brdr_postit);
@@ -157,6 +190,21 @@ namespace Berichtsheft.Dialogs {
 
             // Start the animation
             storyboard.Begin();
+            SaveColor();
+        }
+        
+        public async void SaveColor() {
+            try {
+                await Task.Delay(250);
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(file);
+                XmlElement note = xmlDocument.DocumentElement;
+                note.SetAttribute("color", brdr_postit.Background.ToString());
+                xmlDocument.Save(file);
+            } catch (Exception ex) {
+                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+            }
         }
 
         private void ell_bkgCol_gold_MouseDown(object sender, MouseButtonEventArgs e) { AnimateColorChange("#FFDFB200"); }
@@ -164,5 +212,35 @@ namespace Berichtsheft.Dialogs {
         private void ell_bkgCol_lemongreen_MouseDown(object sender, MouseButtonEventArgs e) { AnimateColorChange("#9dca53"); }
         private void ell_bkgCol_lightpurple_MouseDown(object sender, MouseButtonEventArgs e) { AnimateColorChange("#f87b8d"); }
         private void ell_bkgCol_orange_MouseDown(object sender, MouseButtonEventArgs e) { AnimateColorChange("#e6986a"); }
+
+        private void btn_addText_Copy_Click(object sender, RoutedEventArgs e) {
+            try {
+                //Create XML node
+                XmlDocument noteXML = new XmlDocument(); // New XML document
+                noteXML.Load(file); // Load the XML file
+                XmlElement span = noteXML.CreateElement("span"); // Create a new span node
+                span.InnerText = "Titel"; // Set text value
+
+                // Create new xml attribute
+                XmlAttribute id = noteXML.CreateAttribute("id");
+                int newId = getLastNoteId() + 1; // Set new id
+                id.Value = newId.ToString();
+
+                XmlAttribute preset = noteXML.CreateAttribute("preset");
+                preset.Value = "h2";
+
+                // Append the attributes to the span node
+                span.Attributes.Append(id);
+                span.Attributes.Append(preset);
+                noteXML.DocumentElement.AppendChild(span);
+
+                noteXML.Save(file); // Save the XML file
+
+                TriggerNoteRerendering();
+            } catch (Exception ex) {
+                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+            }
+        }
     }
 }

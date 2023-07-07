@@ -85,10 +85,12 @@ namespace Berichtsheft.UserControls.NoteUserControls {
 
         private void StackPanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e) {
             btn_edit.Visibility = Visibility.Visible;
+            brdr_highlight.Visibility = Visibility.Visible;
         }
 
         private void StackPanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e) {
             btn_edit.Visibility = Visibility.Collapsed;
+            brdr_highlight.Visibility = Visibility.Collapsed;
         }
     }
 }

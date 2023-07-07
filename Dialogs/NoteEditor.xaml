@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft.Dialogs"
-        mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White"
+        mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White" ShowInTaskbar="False"
         Title="Notiz-Editor" Height="441" Width="320" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True">
     <StackPanel Orientation="Vertical">
         <!-- Edit options box -->
@@ -36,8 +36,11 @@
                 </CheckBox>
 
                 <TextBlock Text="Element hinzufügen:" Margin="6,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <Button x:Name="btn_addText" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="6,30,0,0" Padding="1,0,1,0" Background="{x:Null}" Width="30" Click="btn_addText_Click">
+                <Button x:Name="btn_addText" ToolTip="Normaler Text" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="6,30,0,0" Padding="1,0,1,0" Background="{x:Null}" Width="30" Click="btn_addText_Click">
                     <Image Source="/Resources/Icons/abc.png" Height="24" />
+                </Button>
+                <Button x:Name="btn_addText_Copy" ToolTip="Schneller Titel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="41,30,0,0" Padding="1,0,1,0" Background="{x:Null}" Width="30" Click="btn_addText_Copy_Click">
+                    <Image Source="/Resources/Icons/title.png" Height="24" />
                 </Button>
 
                 <TextBlock Text="Notizfarbe:" Margin="6,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
@@ -56,7 +59,7 @@
             </Border.Effect>
             <StackPanel Orientation="Vertical">
                 <Grid>
-                    <TextBlock x:Name="txt_title" Text="Titel" FontFamily="{StaticResource EncodeSans}" FontSize="18" FontWeight="Bold" Foreground="Black" Padding="15,15,5,10" MouseDown="txt_title_MouseDown" />
+                    <TextBlock x:Name="txt_title" Text="Titel" Cursor="SizeAll" FontFamily="{StaticResource EncodeSans}" FontSize="18" FontWeight="Bold" Foreground="Black" Padding="15,15,5,10" MouseDown="txt_title_MouseDown" />
                     <Button x:Name="btn_openEditor" Content="✎" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,36,0" Padding="1,0,1,0" Background="{x:Null}" Width="22" Click="btn_openEditor_Click" Foreground="Black" />
                     <Button x:Name="btn_closeNote" Content="🗙" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,9,0" Style="{StaticResource closeWindowButton}" Width="22" Foreground="Black" Background="{x:Null}" Click="btn_closeNote_Click" />
                 </Grid>
