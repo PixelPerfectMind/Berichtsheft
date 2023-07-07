@@ -294,5 +294,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Backgrounds\godafoss-waterfall.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\title.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
