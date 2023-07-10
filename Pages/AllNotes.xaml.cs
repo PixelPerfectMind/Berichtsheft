@@ -41,8 +41,10 @@ namespace Berichtsheft.Pages {
         }
 
         private void lb_allNotes_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            NoteEditor noteEditor = new NoteEditor(lb_allNotes.SelectedItem.ToString());
-            noteEditor.Show();
+            if(lb_allNotes.SelectedIndex != -1) {
+                NoteEditor noteEditor = new NoteEditor(lb_allNotes.SelectedItem.ToString());
+                noteEditor.Show();
+            }
         }
 
         private void cb_showNoteCreationDialog_Checked(object sender, RoutedEventArgs e) { brdr_newNoteDialog.Visibility = Visibility.Visible; }

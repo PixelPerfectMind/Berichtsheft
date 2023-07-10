@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft.Dialogs"
         mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White" ShowInTaskbar="False"
-        Title="Notiz-Editor" Height="441" Width="320" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True">
+        Title="Notiz-Editor" Height="441" Width="320" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated">
     <StackPanel Orientation="Vertical">
         <!-- Edit options box -->
         <Border x:Name="brdr_editor" Style="{StaticResource windowBorder}" Height="130" RenderTransformOrigin="0.5,0">
@@ -52,6 +52,20 @@
             </Grid>
         </Border>
 
+        <Border Height="25" Width="80" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,-5" BorderThickness="2" BorderBrush="#3FFFFFFF" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#3FFFFFFF"/>
+                    <GradientStop Color="#19FFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-4"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
+
         <!-- Note sheet -->
         <Border x:Name="brdr_postit" CornerRadius="3" Background="#FFFAE75C" Height="261" Margin="10,0,10,0">
             <Border.Effect>
@@ -59,12 +73,25 @@
             </Border.Effect>
             <StackPanel Orientation="Vertical">
                 <Grid>
+                    <Border Width="80" RenderTransformOrigin="0.5,0.5" BorderThickness="2" Height="31" Margin="0,-20,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#3FFFFFFF" >
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#59FFFFFF"/>
+                                <GradientStop Color="#3FFFFFFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="-4"/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
                     <TextBlock x:Name="txt_title" Text="Titel" Cursor="SizeAll" FontFamily="{StaticResource EncodeSans}" FontSize="18" FontWeight="Bold" Foreground="Black" Padding="15,15,5,10" MouseDown="txt_title_MouseDown" />
                     <Button x:Name="btn_openEditor" Content="✎" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,36,0" Padding="1,0,1,0" Background="{x:Null}" Width="22" Click="btn_openEditor_Click" Foreground="Black" />
                     <Button x:Name="btn_closeNote" Content="🗙" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,9,0" Style="{StaticResource closeWindowButton}" Width="22" Foreground="Black" Background="{x:Null}" Click="btn_closeNote_Click" />
                 </Grid>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="5,5,5,0">
-                    <StackPanel Orientation="Vertical" x:Name="contents" Height="209" />
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Padding="5,5,5,0" Height="214">
+                    <StackPanel Orientation="Vertical" x:Name="contents" />
                 </ScrollViewer>
             </StackPanel>
         </Border>

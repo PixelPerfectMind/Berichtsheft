@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Berichtsheft.UserControls.NoteUserControls"
              mc:Ignorable="d" >
-    <Grid Background="Transparent" Margin="10,0,10,0" Width="280" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
+    <Grid x:Name="grd_main" Background="Transparent" Width="286" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
         <Border x:Name="brdr_highlight" Visibility="Collapsed" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -20,7 +20,36 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBlock x:Name="txt" Foreground="Black" FontFamily="{StaticResource EncodeSans}" Text="Leerer Text" Margin="0,1,5,1" TextWrapping="Wrap" />
-        <Button x:Name="btn_edit" Content="Bearbeiten" VerticalAlignment="Center" Height="18" Width="80" Margin="195,0,0,0" Visibility="Collapsed" HorizontalAlignment="Left" Click="btn_edit_Click" />
+        <TextBlock x:Name="txt" Foreground="Black" FontFamily="{StaticResource EncodeSans}" Text="Leerer Text" Margin="3,1,0,1" TextWrapping="Wrap" >
+            <TextBlock.Effect>
+                <BlurEffect x:Name="blr_text" Radius="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <StackPanel Orientation="Horizontal" x:Name="sp_buttons" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="btn_edit" FontFamily="{StaticResource EncodeSans}" Content="Bearbeiten" VerticalAlignment="Center" Height="18" Width="84" Visibility="Visible" Click="btn_edit_Click" />
+            <Button x:Name="btn_delete" FontFamily="{StaticResource EncodeSans}" VerticalAlignment="Center" Height="18" Width="18" Visibility="Visible" HorizontalAlignment="Left" Click="btn_delete_Click" >
+                <Image  Height="12" Width="12" Source="/Resources/Icons/delete_forever_white.png" />
+            </Button>
+        </StackPanel>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="brdr_highlight" Storyboard.TargetProperty="(Border.Opacity)" From="0" To="1" Duration="0:0:0.05" />
+                        <DoubleAnimation Storyboard.TargetName="sp_buttons" Storyboard.TargetProperty="(StackPanel.Opacity)" From="0" To="1" Duration="0:0:0.05" />
+                        <DoubleAnimation Storyboard.TargetName="blr_text" Storyboard.TargetProperty="(BlurEffect.Radius)" From="0" To="7.5" Duration="0:0:0.15" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Grid.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="brdr_highlight" Storyboard.TargetProperty="(Border.Opacity)" From="1" To="0" Duration="0:0:0.05" />
+                        <DoubleAnimation Storyboard.TargetName="sp_buttons" Storyboard.TargetProperty="(StackPanel.Opacity)" From="1" To="0" Duration="0:0:0.05" />
+                        <DoubleAnimation Storyboard.TargetName="blr_text" Storyboard.TargetProperty="(BlurEffect.Radius)" From="7.5" To="0" Duration="0:0:0.15" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
     </Grid>
 </UserControl>
