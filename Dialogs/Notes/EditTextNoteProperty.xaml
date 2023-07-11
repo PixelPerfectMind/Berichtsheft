@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft.Dialogs.Notes"
         mc:Ignorable="d"
-        Title="Texteigenschaften bearbeiten" Height="430" Width="320" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize"
-        FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White">
+        Title="Texteigenschaften bearbeiten" Height="431" Width="340" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize"
+        FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White" WindowStartupLocation="CenterScreen" Topmost="True">
     <Border Style="{StaticResource windowBorder}">
         <Grid>
             <Border Style="{StaticResource titleBar}">
@@ -17,19 +17,74 @@
                     <TextBlock Text="Vorschau:" Margin="10,5,0,0" />
                     <TextBlock x:Name="txt_preview" Text="Text" Margin="10" MaxHeight="64" HorizontalAlignment="Center" TextWrapping="Wrap" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,5">
-                        <Button x:Name="btn_cancel" Content="Abbruch" Width="72" Height="22" />
-                        <Button x:Name="btn_apply" Content="Fertig" Width="56" Height="22" />
+                        <Button x:Name="btn_cancel" Content="Abbruch" Width="72" Height="22" Click="btn_cancel_Click" />
+                        <Button x:Name="btn_apply" Content="Fertig" Width="56" Height="22" Click="btn_apply_Click" />
                     </StackPanel>
                 </StackPanel>
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <Grid>
-                        <TextBlock Text="Inhalt" Margin="10,10,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontStretch="Condensed" FontWeight="Bold"  />
-                        <TextBox x:Name="txt_textContent" Margin="10,30,10,0" VerticalAlignment="Top" Foreground="White" Height="30" Padding="1,1.5,0,0" TextChanged="txt_textContent_TextChanged"  />
-                        <TextBlock Text="Textgröße" Margin="10,65,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStretch="Condensed"  />
-                        <TextBox x:Name="txt_textSize" Margin="10,85,0,0" VerticalAlignment="Top" Foreground="White" MinWidth="50" Height="30" Padding="1,1.5,0,0" TextChanged="txt_textSize_TextChanged" HorizontalAlignment="Left"  />
-                        <TextBlock x:Name="txt_sizeAlert" Text="Die Eingabe darf nur eine gültige Zahl sein!" Margin="10,115,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red"  />
-                        <TextBlock Text="Textgröße" Margin="10,135,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"  />
-                    </Grid>
+                <ScrollViewer Height="280">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,24">
+                        <TextBlock Text="Inhalt" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontStretch="Condensed" FontWeight="Bold"  />
+                        <TextBox x:Name="txt_textContent" Margin="0,5,10,0" VerticalAlignment="Top" Foreground="White" Height="30" Padding="1,1.5,0,0" TextChanged="txt_textContent_TextChanged"  />
+                        <TextBlock Text="Textgröße" Margin="0,10,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStretch="Condensed"  />
+                        <TextBox x:Name="txt_textSize" Margin="0,5,0,0" VerticalAlignment="Top" Foreground="White" MinWidth="50" Height="30" Padding="1,1.5,0,0" TextChanged="txt_textSize_TextChanged" HorizontalAlignment="Left"  />
+                        <TextBlock x:Name="txt_sizeAlert" Text="Die Eingabe darf nur eine gültige Zahl sein!" Margin="0,5,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red"  />
+
+                        <TextBlock Text="Unterstreichen:" Margin="0,10,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStretch="Condensed" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0">
+                            <RadioButton x:Name="rb_underline1" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-underline" Checked="rb_underline1_Checked">
+                                <TextBlock Text="Kein" Foreground="White" FontSize="12" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_underline2" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-underline" Checked="rb_underline2_Checked" Margin="7.5,0,0,0">
+                                <TextBlock Text="Unter" Foreground="White" FontSize="12" TextDecorations="Underline" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_underline4" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-underline" Checked="rb_underline4_Checked" Margin="7.5,0,0,0">
+                                <TextBlock Text="Über" Foreground="White" FontSize="12" TextDecorations="OverLine" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_underline3" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-underline" Checked="rb_underline3_Checked" Margin="7.5,0,0,0">
+                                <TextBlock Text="Durch" Foreground="White" FontSize="12" TextDecorations="Strikethrough" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_underline5" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-underline" Checked="rb_underline5_Checked" Margin="7.5,0,0,0">
+                                <TextBlock Text="Basislinie" Foreground="White" FontSize="12" TextDecorations="Baseline" />
+                            </RadioButton>
+                        </StackPanel>
+
+                        <TextBlock Text="Textdicke:" Margin="0,5,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStretch="Condensed"  />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0">
+                            <RadioButton x:Name="rb_testStretch3" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-stretch" Checked="rb_testStretch3_Checked">
+                                <TextBlock Text="ABC" Foreground="White" FontSize="12" FontWeight="Light" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_testStretch1" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-stretch" Margin="9.9,0,0,0" Checked="rb_testStretch1_Checked">
+                                <TextBlock Text="ABC" Foreground="White" FontSize="12" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_testStretch2" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-stretch" Margin="10,0,0,0" Checked="rb_testStretch2_Checked">
+                                <TextBlock Text="ABC" Foreground="White" FontSize="12" FontWeight="Bold" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_testStretch4" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-stretch" Margin="10,0,0,0" Checked="rb_testStretch4_Checked">
+                                <TextBlock Text="ABC" Foreground="White" FontSize="12" FontWeight="Heavy" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_testStretch5" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="text-stretch" Margin="10,0,0,0" Checked="rb_testStretch5_Checked">
+                                <TextBlock Text="ABC" Foreground="White" FontSize="12" FontWeight="ExtraBlack" />
+                            </RadioButton>
+                        </StackPanel>
+                        <TextBlock Text="Textschräge:" Margin="0,10,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStretch="Condensed"  />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0">
+                            <RadioButton x:Name="rb_fontStyle1" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="font-style" Checked="rb_fontStyle1_Checked">
+                                <TextBlock Text="I" Foreground="White" FontSize="12" FontStyle="Normal" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_fontStyle2" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="font-style" Margin="10,0,0,0" Checked="rb_fontStyle2_Checked">
+                                <TextBlock Text="I" Foreground="White" FontSize="12" FontStyle="Italic" />
+                            </RadioButton>
+                            <RadioButton x:Name="rb_fontStyle3" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="font-style" Margin="10,0,0,0" Checked="rb_fontStyle3_Checked">
+                                <TextBlock Text="I" Foreground="White" FontSize="12" FontStyle="Oblique" />
+                            </RadioButton>
+                        </StackPanel>
+                        <TextBlock Text="Farbe:" Margin="0,10,0,0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStretch="Condensed"  />
+                        <Grid Margin="0,5,0,0">
+                            <TextBlock Text="HEX-Wert eingeben:" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <TextBox x:Name="txt_color" VerticalAlignment="Top" Margin="0,25,70,0" TextChanged="txt_color_TextChanged" Foreground="White" />
+                            <Border x:Name="border_color" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Width="49" Height="49" Background="#FFFFFF" />
+                        </Grid>
+                    </StackPanel>
                 </ScrollViewer>
             </StackPanel>
         </Grid>

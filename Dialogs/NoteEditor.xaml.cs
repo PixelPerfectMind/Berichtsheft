@@ -41,7 +41,7 @@ namespace Berichtsheft.Dialogs {
             }
         }
 
-        private void TriggerNoteRerendering() {
+        internal void TriggerNoteRerendering() {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(file);
             ExtractSpanNodesFromXML(xmlDocument);
@@ -83,7 +83,7 @@ namespace Berichtsheft.Dialogs {
                     }
 
                     // Create new TextElement
-                    TextElement textElement = new TextElement(id, spanNode.InnerText, attributesArray, valuesArray);
+                    TextElement textElement = new TextElement(id, title, spanNode.InnerText, attributesArray, valuesArray);
                     contents.Children.Add(textElement);
                 }
             } catch (Exception ex) {
@@ -158,7 +158,6 @@ namespace Berichtsheft.Dialogs {
                         lastId = id;
                     }
                 }
-                MessageBox.Show(lastId.ToString());
                 return lastId;
             }
             catch (Exception ex) {
@@ -236,6 +235,16 @@ namespace Berichtsheft.Dialogs {
 
                 noteXML.Save(file); // Save the XML file
 
+                TriggerNoteRerendering();
+            } catch (Exception ex) {
+                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+            }
+        }
+
+        private void Window_Activated(object sender, EventArgs e) {
+            contents.Children.Clear();
+            try {
                 TriggerNoteRerendering();
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
