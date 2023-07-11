@@ -1,0 +1,115 @@
+﻿<Window x:Class="Berichtsheft.Dialogs.ReportSummary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Berichtsheft.Dialogs"
+        mc:Ignorable="d"
+        Title="Bericht zusammenfassen" Height="399" Width="596" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" AllowsTransparency="True"
+        FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White" Icon="/Resources/Images/summarize.png">
+    <Border x:Name="brdr_windowBorder" Style="{StaticResource windowBorder}" RenderTransformOrigin="0.5,0.5">
+        <Border.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="windowScale" />
+            </TransformGroup>
+        </Border.RenderTransform>
+        <Border x:Name="brdr_background" ClipToBounds="True">
+            <Grid>
+                <Border x:Name="brdr_background2" Background="#FF5E5A93" Opacity="0" />
+                <Border Style="{StaticResource titleBar}">
+                    <Grid>
+                        <TextBlock x:Name="txt_windowTitle" Text="Bericht zusammenfassen" Style="{StaticResource windowTitleText}" FontFamily="{StaticResource EncodeSansCondensedBold}" MouseDown="txt_windowTitle_MouseDown"/>
+                        <Button x:Name="btn_maximizeWindow" Style="{StaticResource WindowButton}" Content="🗖" Margin="0,0,36,0" VerticalAlignment="Center" Click="btn_maximizeWindow_Click" />
+                        <Button x:Name="btn_maximizeWindow_Copy" Style="{StaticResource WindowButton}" Content="🗕" Margin="0,0,65,0" VerticalAlignment="Center" Click="btn_maximizeWindow_Copy_Click" />
+                        <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" Click="btn_closeWindow_Click" >
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="0" Duration="0:0:0.07" />
+                                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.07" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Grid>
+                </Border>
+                <Grid RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="sctr_windowContent"/>
+                            <TranslateTransform x:Name="ttrf_windowContent" />
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Grid Background="#FF5E5A93" Margin="0,38,0,0" Height="75" VerticalAlignment="Top">
+                        <Image Source="/Resources/Images/summarize.png" HorizontalAlignment="Left" Margin="11,10,0,-19" RenderTransformOrigin="0.5,0.5" Width="85" >
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <SkewTransform AngleX="7" AngleY="-8"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="112,0,0,0">
+                            <TextBlock Text="Bericht" FontSize="24" FontStretch="Condensed" />
+                            <TextBlock Text="zusammenfassen" FontSize="24" Margin="5,0,0,0" FontStretch="Condensed" FontWeight="Bold" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid x:Name="grd_contents">
+                        <TextBlock Text="Bitte wähle die Kalenderwoche zum zusammenfassen aus!" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="112,135,0,0" />
+                        <DatePicker x:Name="dp_week" Margin="112,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" FirstDayOfWeek="Monday" CalendarClosed="dp_week_CalendarClosed" />
+                        <Button x:Name="btn_selectLastMonday" Content="Letzter Montag..." VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="279,0,0,180" Width="135" Click="btn_selectLastMonday_Click"  />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Window.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="0.9" To="1" Duration="0:0:0.07" />
+                        <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.1" To="1" Duration="0:0:0.1" />
+
+                        <!-- Experiment: Zoom-out-Animation at start -->
+                        <!-- Set ScaleTransform -->
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="sctr_windowContent" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" BeginTime="0:0:0" Duration="0:0:1.25">
+                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="1.3" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1.3" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1.25" Value="1" />
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="sctr_windowContent" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" BeginTime="0:0:0" Duration="0:0:1.25">
+                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="1.3" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1.3" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1.25" Value="1" />
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <!-- Set TranslateTransform -->
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ttrf_windowContent" Storyboard.TargetProperty="(TranslateTransform.Y)" BeginTime="0:0:0" Duration="0:0:1.25">
+                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="130" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="130" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1.25" Value="0" />
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ttrf_windowContent" Storyboard.TargetProperty="(TranslateTransform.X)" BeginTime="0:0:0" Duration="0:0:1.25">
+                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="130" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="130" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1.25" Value="0" />
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <!-- Set Opacity -->
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grd_contents" Storyboard.TargetProperty="(Grid.Opacity)" BeginTime="0:0:0" Duration="0:0:1.25">
+                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="0" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1.25" Value="1" />
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="brdr_background2" Storyboard.TargetProperty="(Border.Opacity)" BeginTime="0:0:0" Duration="0:0:1.25">
+                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="1" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                            <LinearDoubleKeyFrame KeyTime="0:0:1.25" Value="0" />
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+    </Border>
+</Window>

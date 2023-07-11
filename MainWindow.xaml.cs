@@ -136,5 +136,13 @@ namespace Berichtsheft {
                 blr_backgroundImage.Radius = 6000 / this.Height;
             }
         }
+
+        private void btn_allEntries_Click(object sender, RoutedEventArgs e) {
+            if (fr_main.Content.GetType() == typeof(AllReports)){
+                AllReports allReports = (AllReports)fr_main.Content;
+            } else {
+                fr_main.Content = new AllReports();
+            }
+        }
     }
 }

@@ -51,7 +51,7 @@
                     <!-- Navigation bar -->
                     <Grid x:Name="grd_navBar" Margin="0,37,0,0" Background="#FF00a3ae" Height="50" VerticalAlignment="Top">
                         <Button x:Name="btn_start" Content="Start" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,0,0,0" Click="btn_start_Click" />
-                        <Button x:Name="btn_allEntries" Content="Alle Einträge" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="70,0,0,0" />
+                        <Button x:Name="btn_allEntries" Content="Alle Einträge" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="70,0,0,0" Click="btn_allEntries_Click" />
                         <Button x:Name="btn_allNotes" Content="Alle Notizen" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="180,0,0,0" Click="btn_allNotes_Click" />
                         <Button x:Name="btn_allProjects" Content="Alle Projekte" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="290,0,0,0" Click="btn_allProjects_Click" />
                         <Button x:Name="btn_dayHistory" Content="Projekt-Tracking" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="134" Margin="400,0,0,0" Click="btn_dayHistory_Click" />

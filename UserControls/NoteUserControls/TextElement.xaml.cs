@@ -102,7 +102,7 @@ namespace Berichtsheft.UserControls.NoteUserControls {
             brdr_highlight.Visibility = Visibility.Collapsed;
         }
 
-        private async void btn_edit_Click(object sender, RoutedEventArgs e)  {
+        private void btn_edit_Click(object sender, RoutedEventArgs e)  {
             Dialogs.Notes.EditTextNoteProperty editTextNoteProperty = new Dialogs.Notes.EditTextNoteProperty(noteName);
             editTextNoteProperty.txt_textContent.Text = txt.Text;
             editTextNoteProperty.txt_textSize.Text = txt.FontSize.ToString();
