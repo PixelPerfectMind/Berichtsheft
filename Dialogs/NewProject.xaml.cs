@@ -10,10 +10,6 @@ namespace Berichtsheft.Dialogs {
         public NewProject() {
             InitializeComponent();
         }
-        public NewProject(double parentWindowTop, double ParentWindowLeft)
-        {
-            InitializeComponent();
-        }
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e) {
             if(txt_projectName.Text != "" && !projectWithThisNameAlreatyExists(txt_projectName.Text)) {
