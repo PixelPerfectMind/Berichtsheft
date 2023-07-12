@@ -91,8 +91,14 @@
     <Compile Include="Dialogs\ProjectPicker.xaml.cs">
       <DependentUpon>ProjectPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ReportSummary.xaml.cs">
+      <DependentUpon>ReportSummary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AllNotes.xaml.cs">
       <DependentUpon>AllNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AllReports.xaml.cs">
+      <DependentUpon>AllReports.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProjectTracking.xaml.cs">
       <DependentUpon>ProjectTracking.xaml</DependentUpon>
@@ -146,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\ReportSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -167,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AllProjects.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AllReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -303,6 +317,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\summarize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\summarize.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
