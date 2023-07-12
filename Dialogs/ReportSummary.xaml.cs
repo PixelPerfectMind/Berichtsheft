@@ -18,8 +18,7 @@ namespace Berichtsheft.Dialogs {
         private void btn_maximizeWindow_Click(object sender, RoutedEventArgs e) {
             if (this.WindowState == WindowState.Normal) {
                 btn_maximizeWindow.Content = "🗗";
-                Thickness margin = new Thickness(6);
-                margin.Bottom = (Screen.PrimaryScreen.Bounds.Bottom - Screen.PrimaryScreen.WorkingArea.Bottom) - 30;
+                Thickness margin = new Thickness(6) { Bottom = (Screen.PrimaryScreen.Bounds.Bottom - Screen.PrimaryScreen.WorkingArea.Bottom) - 30 };
                 brdr_windowBorder.Margin = margin;
                 this.WindowState = WindowState.Maximized;
             } else {

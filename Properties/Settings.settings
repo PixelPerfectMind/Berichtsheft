@@ -11,5 +11,8 @@
     <Setting Name="expDate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">2023-07-31</Value>
     </Setting>
+    <Setting Name="versionHasTimeBomb" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

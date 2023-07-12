@@ -7,28 +7,33 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Xml;
 using TextElement = Berichtsheft.UserControls.NoteUserControls.TextElement;
+using FileOptions = Berichtsheft.Classes.FileActions;
 
 namespace Berichtsheft.Dialogs {
 
     public partial class NoteEditor : Window {
 
-        public string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Berichtsheft\Notes";
-
-
         public int id;
         public string title;
         public string file;
+
+        public string path = "";
         public NoteEditor(string title) {
-            InitializeComponent();
-            this.title = title;
-            txt_title.Text = title;
-            this.file = path + @"\" + title + @".xml";
-
-            brdr_editor.Visibility = Visibility.Collapsed;
-
             try {
-                TriggerNoteRerendering();
-                XmlDocument xmlDocument = new XmlDocument();
+                FileOptions fileOptions = new FileOptions();
+                path = fileOptions.path + @"\Notes";
+
+                InitializeComponent();
+
+                this.title = title;
+                txt_title.Text = title;
+                this.file = path + @"\" + title + @".xml";
+
+                brdr_editor.Visibility = Visibility.Collapsed;
+
+                ExtractSpanNodesFromXML();                                                              // Extract the span nodes from the XML file
+
+                XmlDocument xmlDocument = new XmlDocument();                                            // Load the XML file for getting the background color
                 xmlDocument.Load(file);
                 XmlNodeList noteNote = xmlDocument.SelectNodes("/note");
                 foreach (XmlNode noteNode in noteNote) {
@@ -41,50 +46,44 @@ namespace Berichtsheft.Dialogs {
             }
         }
 
-        internal void TriggerNoteRerendering() {
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(file);
-            ExtractSpanNodesFromXML(xmlDocument);
-        }
 
-        public void ExtractSpanNodesFromXML(XmlDocument xmlDocument) {
-            contents.Children.Clear();
+        /// <summary>
+        /// Refreshes the note's contents and extracts the span nodes from the XML file
+        /// </summary>
+        public void ExtractSpanNodesFromXML() {
             try {
-                // Declare temporary lists
+                contents.Children.Clear();
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(file);
+
                 List<string> attributes = new List<string>();
                 List<string> values = new List<string>();
 
-                // Extract all span nodes from the XML file
-
-                // Get all span nodes
-                XmlNodeList spanNodes = xmlDocument.SelectNodes("//span");
+                XmlNodeList spanNodes = xmlDocument.SelectNodes("//span");                                  // Get all span nodes
 
                 // Loop through all span nodes
-                foreach (XmlNode spanNode in spanNodes) {
+                foreach (XmlNode spanNode in spanNodes) {                                                   // Loop through all span nodes
                     attributes.Clear();
                     values.Clear();
 
-                    // Get the span node's attributes
                     XmlAttributeCollection spanAttributes = spanNode.Attributes;
-                    foreach (XmlAttribute spanAttribute in spanAttributes) {
-                        // Add the attribute to the list
-                        attributes.Add(spanAttribute.Name);
+                    foreach (XmlAttribute spanAttribute in spanAttributes) {                                // Loop through all attributes
+                        attributes.Add(spanAttribute.Name);                                                 // Add the attribute to the list
                         values.Add(spanAttribute.Value);
                     }
 
-                    // Declare array variables
-                    string[] attributesArray = new string[attributes.Count];
+                    string[] attributesArray = new string[attributes.Count];                                // Declare array variables
                     string[] valuesArray = new string[values.Count];
 
-                    //Append valöues to array
-                    for (int i = 0; i < attributes.Count; i++) {
+                    for (int i = 0; i < attributes.Count; i++) {                                            // Loop through both lists and append the values to the arrays
                         attributesArray[i] = attributes[i];
                         valuesArray[i] = values[i];
                     }
 
-                    // Create new TextElement
-                    TextElement textElement = new TextElement(id, title, spanNode.InnerText, attributesArray, valuesArray);
-                    contents.Children.Add(textElement);
+                    
+                    TextElement textElement = new TextElement(id, title, spanNode.InnerText,
+                        attributesArray, valuesArray);                                                      // Create new TextElement, which contains the span node's contents
+                    contents.Children.Add(textElement);                                                     // Add the TextElement to the contents stackpanel
                 }
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
@@ -113,48 +112,41 @@ namespace Berichtsheft.Dialogs {
         private void btn_addText_Click(object sender, RoutedEventArgs e) {
             try {
                 //Create XML node
-                XmlDocument noteXML = new XmlDocument(); // New XML document
-                noteXML.Load(file); // Load the XML file
-                XmlElement span = noteXML.CreateElement("span"); // Create a new span node
-                span.InnerText = "Notiztext"; // Set text value
+                XmlDocument noteXML = new XmlDocument();
+                noteXML.Load(file);
+                XmlElement span = noteXML.CreateElement("span");                                            // Create a new span node
+                span.InnerText = "Notiztext";                                                               // Set text value
 
-                // Create new xml attribute
-                XmlAttribute id = noteXML.CreateAttribute("id");
-
+                XmlAttribute id = noteXML.CreateAttribute("id");                                            // Create new xml attribute...
                 int newId = getLastNoteId() + 1;
+                id.Value = newId.ToString();                                                                // ...and set its value
 
-                id.Value = newId.ToString();
-
-                // Append the attributes to the span node
-                span.Attributes.Append(id);
-                noteXML.DocumentElement.AppendChild(span);
-
-                noteXML.Save(file); // Save the XML file
-
-                TriggerNoteRerendering();
+                span.Attributes.Append(id);                                                                 // Append the attributes to the span node
+                noteXML.DocumentElement.AppendChild(span);                                                  // Append the span node to the document element
+                noteXML.Save(file);
+                ExtractSpanNodesFromXML();
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
                 exceptionWindow.ShowDialog();
             }
         }
 
+        /// <summary>
+        /// returns the last note id from the XML file
+        /// </summary>
+        /// <returns></returns>
         public int getLastNoteId() {
             try {
-                // Load the XML file
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(file);
 
-                // Get all span nodes
                 XmlNodeList spanNodes = xmlDocument.SelectNodes("//span");
 
-                // Temp work variable
                 int lastId = 0;
 
-                // Loop through all span nodes
-                foreach (XmlNode spanNode in spanNodes) {
+                foreach (XmlNode spanNode in spanNodes) {                                                   // Loop through all span nodes, searching for the biggest id value
                     int id = Convert.ToInt32(spanNode.Attributes["id"].Value);
                     if (id > lastId) {
-                        // If the current id is greater than the last id, set the lastId to the current id
                         lastId = id;
                     }
                 }
@@ -167,38 +159,47 @@ namespace Berichtsheft.Dialogs {
             }
         }
 
+        /// <summary>
+        /// Animates the color change of the Post-It-Border
+        /// </summary>
+        /// <param name="newColor"></param>
         public void AnimateColorChange(string newColor= "#FFFAE75C") {
-            SolidColorBrush initialColor = (SolidColorBrush)brdr_postit.Background;
+            try {
+                SolidColorBrush initialColor = (SolidColorBrush)brdr_postit.Background;                     // Get the initial color
 
-            // Set the initial color for the border
-            brdr_postit.Background = initialColor;
+                brdr_postit.Background = initialColor;                                                      // Set the initial color as the background
 
-            // Create a ColorAnimation to animate the color
-            ColorAnimation colorAnimation = new ColorAnimation();
-            colorAnimation.From = initialColor.Color;
-            colorAnimation.To = (Color)ColorConverter.ConvertFromString(newColor);
-            colorAnimation.Duration = TimeSpan.FromSeconds(0.25);  // Replace 2 with the duration of the animation in seconds
+                ColorAnimation colorAnimation = new ColorAnimation {                                        // Create a ColorAnimation to animate the color change
+                    From = initialColor.Color,
+                    To = (Color)ColorConverter.ConvertFromString(newColor),
+                    Duration = TimeSpan.FromSeconds(0.25)
+                };
 
-            // Apply the animation to the border's Background property
-            Storyboard.SetTarget(colorAnimation, brdr_postit);
-            Storyboard.SetTargetProperty(colorAnimation, new PropertyPath("Background.Color"));
+                
+                Storyboard.SetTarget(colorAnimation, brdr_postit);                                          // Set the target of the animation to the border
+                Storyboard.SetTargetProperty(colorAnimation, new PropertyPath("Background.Color"));         // Apply the animation to the Background.Color property
 
-            // Create a Storyboard and add the ColorAnimation to it
-            Storyboard storyboard = new Storyboard();
-            storyboard.Children.Add(colorAnimation);
+                Storyboard storyboard = new Storyboard();                                                   // Create a new storyboard
+                storyboard.Children.Add(colorAnimation);                                                    // Add the animation to the storyboard
 
-            // Start the animation
-            storyboard.Begin();
-            SaveColor();
+                storyboard.Begin();                                                                         // Begin the animation
+                SaveColor();
+            } catch (Exception ex) {
+                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+            }
         }
         
+        /// <summary>
+        /// Saves the background color of the note to the XML file
+        /// </summary>
         public async void SaveColor() {
             try {
-                await Task.Delay(250);
+                await Task.Delay(250);                                                                      // Wait for the animation to finish
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(file);
-                XmlElement note = xmlDocument.DocumentElement;
-                note.SetAttribute("color", brdr_postit.Background.ToString());
+                XmlElement note = xmlDocument.DocumentElement;                                              // Get the root node
+                note.SetAttribute("color", brdr_postit.Background.ToString());                              // Set the color attribute
                 xmlDocument.Save(file);
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
@@ -214,28 +215,25 @@ namespace Berichtsheft.Dialogs {
 
         private void btn_addText_Copy_Click(object sender, RoutedEventArgs e) {
             try {
-                //Create XML node
-                XmlDocument noteXML = new XmlDocument(); // New XML document
-                noteXML.Load(file); // Load the XML file
-                XmlElement span = noteXML.CreateElement("span"); // Create a new span node
-                span.InnerText = "Titel"; // Set text value
+                XmlDocument noteXML = new XmlDocument();
+                noteXML.Load(file);
+                XmlElement span = noteXML.CreateElement("span");                                            // Create a new span node
+                span.InnerText = "Titel";                                                                   // Set text value
 
-                // Create new xml attribute
-                XmlAttribute id = noteXML.CreateAttribute("id");
-                int newId = getLastNoteId() + 1; // Set new id
-                id.Value = newId.ToString();
+                XmlAttribute id = noteXML.CreateAttribute("id");                                            // Create id attribute
+                int newId = getLastNoteId() + 1;
+                id.Value = newId.ToString();                                                                // Set the value of the id attribute
 
                 XmlAttribute preset = noteXML.CreateAttribute("preset");
                 preset.Value = "h2";
 
-                // Append the attributes to the span node
-                span.Attributes.Append(id);
+                span.Attributes.Append(id);                                                                 // Append the attributes to the span node
                 span.Attributes.Append(preset);
-                noteXML.DocumentElement.AppendChild(span);
+                noteXML.DocumentElement.AppendChild(span);                                                  // Append the span node to the root node
 
-                noteXML.Save(file); // Save the XML file
+                noteXML.Save(file);                                                                         // Save the XML file
 
-                TriggerNoteRerendering();
+                ExtractSpanNodesFromXML();                                                                  // Refresh the StackPanel
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
                 exceptionWindow.ShowDialog();
@@ -243,9 +241,8 @@ namespace Berichtsheft.Dialogs {
         }
 
         private void Window_Activated(object sender, EventArgs e) {
-            contents.Children.Clear();
             try {
-                TriggerNoteRerendering();
+                ExtractSpanNodesFromXML();
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
                 exceptionWindow.ShowDialog();

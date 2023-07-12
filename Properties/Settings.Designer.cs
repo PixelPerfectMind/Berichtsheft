@@ -58,5 +58,17 @@ namespace Berichtsheft.Properties {
                 this["expDate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool versionHasTimeBomb {
+            get {
+                return ((bool)(this["versionHasTimeBomb"]));
+            }
+            set {
+                this["versionHasTimeBomb"] = value;
+            }
+        }
     }
 }
