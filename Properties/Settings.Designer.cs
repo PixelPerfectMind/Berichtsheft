@@ -25,18 +25,6 @@ namespace Berichtsheft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.0-amd64-openSource")]
-        public string appVersion {
-            get {
-                return ((string)(this["appVersion"]));
-            }
-            set {
-                this["appVersion"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool setupDone {
             get {
@@ -44,30 +32,6 @@ namespace Berichtsheft.Properties {
             }
             set {
                 this["setupDone"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2023-07-31")]
-        public global::System.DateTime expDate {
-            get {
-                return ((global::System.DateTime)(this["expDate"]));
-            }
-            set {
-                this["expDate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool versionHasTimeBomb {
-            get {
-                return ((bool)(this["versionHasTimeBomb"]));
-            }
-            set {
-                this["versionHasTimeBomb"] = value;
             }
         }
     }

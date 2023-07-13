@@ -22,6 +22,7 @@ namespace Berichtsheft.Dialogs {
         /// </summary>
         public Launch() {
             try {
+                DefaultValues defaultValues = new DefaultValues();
                 // If Left shift key is pressed on startup, reset the app
                 if (Keyboard.IsKeyDown(Key.LeftShift)) {                                                        // Check if the left shift key is pressed, then show a message box
                     if(MessageBox.Show("Willst du die Anwendung komplett zurücksetzen?", "Problembehandlung", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)  {
@@ -31,9 +32,9 @@ namespace Berichtsheft.Dialogs {
                 }
 
                 // Check if the version has a time bomb
-                if(Properties.Settings.Default.versionHasTimeBomb == true) {
+                if(defaultValues.IsDevRelease() == true) {
                     // Then, Check if the time bomb has expired
-                    if (DateTime.Now.ToFileTimeUtc() > Properties.Settings.Default.expDate.ToFileTimeUtc()) {   // If the check passes, show the expired page
+                    if (DateTime.Now.ToFileTimeUtc() > defaultValues.TimeBomb().ToFileTimeUtc()) {              // If the check passes, show the expired page
                         ShowExpired();
                     } else {                                                                                    // Else, Check if the setup is done
                         if (Properties.Settings.Default.setupDone == false) {                                   // When setup is not done, show the welcome page

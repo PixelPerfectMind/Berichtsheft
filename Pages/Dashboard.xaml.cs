@@ -50,6 +50,8 @@ namespace Berichtsheft.Pages {
                     }
                 }
             } catch (Exception ex) {
+                txt_currentProject.Text = "Ein Fehler beim Abrufen der Informationen ist aufgetreten!";
+                txt_currentlyYouWorkAtThis.Visibility = System.Windows.Visibility.Collapsed;
                 ExceptionWindow exceptionDialog = new ExceptionWindow(ex);
                 exceptionDialog.ShowDialog();
             }
