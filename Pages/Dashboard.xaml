@@ -10,8 +10,8 @@
     <Grid>
         <TextBlock x:Name="txt_name" Text="Hallo Name!" FontFamily="{StaticResource EncodeSansCondensedBold}" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,24,0,0"/>
         <TextBlock x:Name="txt_date" Text="Heute ist der 01.01.20**" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,59,0,0"/>
-        <TextBlock Text="Aktuell arbeitest du an diesem Projekt:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,100,0,0"/>
-        <TextBlock Text="Ein Projekt - Seit 9:41 Uhr" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,125,0,0"/>
+        <TextBlock x:Name="txt_currentlyYouWorkAtThis" Text="Aktuell arbeitest du an diesem Projekt:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,100,0,0"/>
+        <TextBlock x:Name="txt_currentProject" Text="Ein Projekt - Seit 9:41 Uhr" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,125,0,0"/>
         <TextBlock Text="Deine Tagesnotizen:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,210,0,0"/>
         <StackPanel Orientation="Vertical" Margin="24,242,10,0" Height="159" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
