@@ -83,7 +83,10 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
-
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="Gray" />
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 

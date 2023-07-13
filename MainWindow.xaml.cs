@@ -4,6 +4,7 @@ using Berichtsheft.Pages;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -147,6 +148,20 @@ namespace Berichtsheft {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
                 exceptionWindow.ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// Happens when the window is in focus.<br></br>
+        /// Refreshes data in several pages.
+        /// </summary>
+        private void window_Activated(object sender, EventArgs e) {
+            try {
+                if (fr_main.Content.GetType() == typeof(Dashboard)) {
+                    Dashboard dashboard = fr_main.Content as Dashboard;
+                    dashboard?.ReloadNoteList();
+                    dashboard?.ShowNewestProject();
+                }
+            } catch { }
         }
     }
 }

@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:blurView="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
         xmlns:local="clr-namespace:Berichtsheft"
         mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" WindowStartupLocation="CenterScreen"
-        Title="Berichtsheft" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip" SizeChanged="window_SizeChanged">
+        Title="Berichtsheft" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip" SizeChanged="window_SizeChanged" Activated="window_Activated">
     <Border x:Name="brdr_windowBorder" Style="{StaticResource windowBorder}" RenderTransformOrigin="0.5,0.5">
         <Border.RenderTransform>
             <TransformGroup>
@@ -37,6 +36,7 @@
                                                 <Storyboard>
                                                     <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="0" Duration="0:0:0.2" />
                                                     <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.2" />
+                                                    <DoubleAnimation Storyboard.TargetName="brdr_windowBorder" Storyboard.TargetProperty="(Border.Opacity)" From="1" To="0" Duration="0:0:0.15" BeginTime="0:0:0.05" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </EventTrigger>
@@ -69,16 +69,13 @@
                         <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
                     </Border.Effect>
                     <Border ClipToBounds="True">
-                        <blurView:BlurryUserControl BlurContainer="{Binding ElementName=grd_windowInner}"
-                                                BlurRadius="10" Magnification=".1"
-                                                Background="{x:Null}"  >
-                            <blurView:BlurryUserControl.Effect>
+                        <Border>
+                            <Border.Effect>
                                 <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="15"/>
-                            </blurView:BlurryUserControl.Effect>
+                            </Border.Effect>
                             <Border CornerRadius="3" Background="#7F00A3AE" BorderBrush="#7F000000" BorderThickness="1">
-
                             </Border>
-                        </blurView:BlurryUserControl>
+                        </Border>
                     </Border>
                 </Border>
             </Border>
@@ -90,6 +87,7 @@
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="0" To="1" Duration="0:0:0.1" />
                         <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0" To="1" Duration="0:0:0.1" />
+                        <DoubleAnimation Storyboard.TargetName="brdr_windowBorder" Storyboard.TargetProperty="(Border.Opacity)" From="0" To="1" Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
