@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows.Controls;
 using System.Xml;
 using Berichtsheft.Classes;
 using Berichtsheft.Dialogs;
+using Berichtsheft.Dialogs.Notes;
 
 namespace Berichtsheft.Pages {
 
@@ -22,6 +25,7 @@ namespace Berichtsheft.Pages {
 
                 InitializeComponent();
                 ShowNewestProject();
+                ReloadNoteList();
 
                 txt_name.Text = "Hallo, " + Environment.UserName + "!";
                 txt_date.Text = "Heute ist " + DateTime.Now.ToString("dddd") + ", der " + DateTime.Now.ToString("dd. MMMM yyyy");
@@ -34,8 +38,10 @@ namespace Berichtsheft.Pages {
         /// <summary>
         /// Displays the current project name 
         /// </summary>
-        private void ShowNewestProject() {
+        public void ShowNewestProject() {
             try {
+                txt_currentProject.Text = "Ein Fehler beim Abrufen der Informationen ist aufgetreten!";
+                txt_currentlyYouWorkAtThis.Visibility = System.Windows.Visibility.Collapsed;
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(path);
                 XmlNodeList xmlNodes = xmlDocument.SelectNodes("//project");
@@ -43,15 +49,13 @@ namespace Berichtsheft.Pages {
                     XmlAttributeCollection xmlAttributes = node.Attributes;
                     if (xmlAttributes["to"].Value == "" && Convert.ToInt16(xmlAttributes["position"].Value) == getNewestActivity()) {
                         txt_currentProject.Text = xmlAttributes["name"].Value + " - Seit " + xmlAttributes["from"].Value + " Uhr";
+                        txt_currentlyYouWorkAtThis.Visibility = System.Windows.Visibility.Visible;
                         break;
                     } else {
                         txt_currentProject.Text = "Aktuell wird anscheinend kein Projekt bearbeitet";
-                        txt_currentlyYouWorkAtThis.Visibility = System.Windows.Visibility.Collapsed;
                     }
                 }
             } catch (Exception ex) {
-                txt_currentProject.Text = "Ein Fehler beim Abrufen der Informationen ist aufgetreten!";
-                txt_currentlyYouWorkAtThis.Visibility = System.Windows.Visibility.Collapsed;
                 ExceptionWindow exceptionDialog = new ExceptionWindow(ex);
                 exceptionDialog.ShowDialog();
             }
@@ -77,6 +81,45 @@ namespace Berichtsheft.Pages {
                 }
             }
             return temp;
+        }
+
+
+        /// <summary>
+        /// This method reloads the list which contains all notes.
+        /// </summary>
+        public void ReloadNoteList() {
+            try {
+                FileActions fileActions = new FileActions();                                                                        // Create Instance of FileActions to get the root path
+                sp.Children.Clear();
+
+                List<string> noteList = new List<string>();
+                foreach (var notes in Directory.GetFiles(fileActions.path + @"\Notes")) {
+                    noteList.Add(notes);
+                }
+                noteList.Sort((x, y) => DateTime.Compare(File.GetCreationTime(y), File.GetCreationTime(x)));                        // Sort by file creation date
+                
+
+                foreach (var notes in noteList) {
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(notes);
+                    XmlNodeList xmlNodes = xmlDocument.SelectNodes("//note");
+                    string colorVal = "";
+                    foreach (XmlNode node in xmlNodes) {                                                                            // Get the background color value of the note
+                        XmlAttributeCollection xmlAttributes = node.Attributes;
+                        if (xmlAttributes["color"].Value != "") {
+                            colorVal = xmlAttributes["color"].Value;
+                            continue;
+                        }
+                    }
+                    xmlDocument.Save(notes);
+
+                    string note = notes.Replace(fileActions.path + @"\Notes\", "");
+                    note = note.Replace(".xml", "");     
+
+                    DashboardNoteItem dashboardNoteItem = new DashboardNoteItem(note, colorVal);
+                    sp.Children.Add(dashboardNoteItem);
+                }
+            } catch { }
         }
     }
 }

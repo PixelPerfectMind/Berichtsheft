@@ -40,12 +40,21 @@ namespace Berichtsheft {
                 this.Left = desktopWorkingArea.Right - 220;                                                                         // Set the left position to the right of the screen
                 this.Top = desktopWorkingArea.Bottom - 260;                                                                         // Set the top position to the bottom of the screen
 
-            
-                btn_stopTimeTracking.IsEnabled = false;                                                                             // Set the stop tracking button to disabled
+                // -- Check if there is an unfinshed project in the XML file --
+                if (CurrentProjectFinished()) {
+                    btn_stopTimeTracking.IsEnabled = true;
+                    btn_trackTime.IsEnabled = false;
+                } else {
+                    btn_stopTimeTracking.IsEnabled = false;
+                    btn_trackTime.IsEnabled = true;
+                }
 
                 if (!System.IO.File.Exists(file)) {                                                                                 // Create empty project tracking file if it doesn't exist
                     XmlDocument xmlDocument = new XmlDocument();                                                                    // Create a new XML document
                     XmlNode workDay = xmlDocument.CreateElement("workDay");                                                         // Create the root node
+                    XmlAttribute xmlAttribute = xmlDocument.CreateAttribute("date");
+                    xmlAttribute.Value = DateTime.Now.ToString("dd.MM.yyyy");
+                    workDay.Attributes.Append(xmlAttribute);
                     xmlDocument.AppendChild(workDay);                                                                               // Append the root node to the XML document
                     xmlDocument.Save(file);                                                                                         // Save the XML document
                     }
@@ -69,6 +78,23 @@ namespace Berichtsheft {
             } else {
                 chkbox_minimized.IsChecked = true;                                                                                  // Else, Show the small menu
             }
+        }
+
+        /// <summary>
+        /// Returns, if the current project is finished or not
+        /// </summary>
+        private bool CurrentProjectFinished() {
+            try {
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(file);
+                XmlNodeList xmlNodeList = xmlDocument.SelectNodes("workDay/project");
+                foreach(XmlNode xmlNode in xmlNodeList) {
+                    if (xmlNode.Attributes["to"].Value == "") {
+                        return false;
+                    }
+                }
+                return true;
+            } catch { return false; }
         }
 
         private void btn_hideMiniWindow_Click(object sender, RoutedEventArgs e) {
@@ -127,7 +153,6 @@ namespace Berichtsheft {
                 }
                 btn_trackTime.IsEnabled = true;
                 btn_stopTimeTracking.IsEnabled = false;
-                txt_recordingTime.Text = "0";
         }
 
         public List<Record> records = new List<Record>();

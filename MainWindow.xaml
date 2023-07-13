@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft"
         mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" WindowStartupLocation="CenterScreen"
-        Title="Berichtsheft" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip" SizeChanged="window_SizeChanged">
+        Title="Berichtsheft" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip" SizeChanged="window_SizeChanged" Activated="window_Activated">
     <Border x:Name="brdr_windowBorder" Style="{StaticResource windowBorder}" RenderTransformOrigin="0.5,0.5">
         <Border.RenderTransform>
             <TransformGroup>

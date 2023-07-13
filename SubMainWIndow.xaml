@@ -8,7 +8,7 @@
         Title="Berichtsheft embedded window" Background="{x:Null}" MaxHeight="260" MaxWidth="220" MinHeight="260" MinWidth="220" FontFamily="{StaticResource EncodeSans}" WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="False" AllowsTransparency="True" Topmost="True">
     <StackPanel x:Name="sp_main" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
-        <Border x:Name="brdr_smallWindow" Visibility="Collapsed" Style="{StaticResource windowBorder}" Height="133" RenderTransformOrigin="0.5,0.5">
+        <Border x:Name="brdr_smallWindow" Visibility="Collapsed" Style="{StaticResource windowBorder}" Height="142" RenderTransformOrigin="0.5,0.5" CornerRadius="10" >
             <Border.Effect>
                 <DropShadowEffect Direction="270" BlurRadius="10" ShadowDepth="2"/>
             </Border.Effect>
@@ -24,7 +24,7 @@
                         <Button x:Name="btn_hideMiniWindow" Style="{StaticResource closeWindowButton}" Content="X" Click="btn_hideMiniWindow_Click" />
                     </Grid>
                 </Border>
-                <Grid Margin="0,38,0,0">
+                <Grid Margin="0,43,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="140">
                     <CheckBox x:Name="cb_showMiniWindow" Content="Mini-Fenster zeigen" IsEnabled="False" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="cb_showMiniWindow_Checked" Unchecked="cb_showMiniWindow_Unchecked">
                         <CheckBox.Triggers>
                             <EventTrigger RoutedEvent="CheckBox.Checked">
@@ -45,8 +45,8 @@
                             </EventTrigger>
                         </CheckBox.Triggers>
                     </CheckBox>
-                    <Button x:Name="btn_openFullApp" Content="App öffnen" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" Margin="0,10,0,0" Click="btn_openFullApp_Click" />
-                    <Button x:Name="btn_closeApp" Content="App beenden" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" Margin="0,49,0,0" Click="btn_closeApp_Click" />
+                    <Button x:Name="btn_openFullApp" Content="App öffnen" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Margin="0,10,0,0" Click="btn_openFullApp_Click" />
+                    <Button x:Name="btn_closeApp" Content="App beenden" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Margin="0,49,0,0" Click="btn_closeApp_Click" />
                 </Grid>
             </Grid>
         </Border>
@@ -67,7 +67,7 @@
                     <ScaleTransform x:Name="sctr_smallMenu"/>
                 </TransformGroup>
             </Border.RenderTransform>
-            <StackPanel Orientation="Horizontal" Height="50" Width="200">
+            <StackPanel Orientation="Horizontal" Height="50" Width="124">
                 <CheckBox x:Name="chkbox_minimized" Content="Menü anzeigen" IsEnabled="False" Visibility="Collapsed" Checked="chkbox_minimized_Checked" Unchecked="chkbox_minimized_Unchecked">
                     <CheckBox.Triggers>
                         <EventTrigger RoutedEvent="CheckBox.Checked">
@@ -99,10 +99,6 @@
                 <Button x:Name="btn_stopTimeTracking" Width="34" ToolTip="Projektzeitaufzeichnung stoppen" Click="btn_stopTimeTracking_Click">
                     <Image Source="/Resources/Icons/timeline_stop_white.png" Height="24" Width="24" />
                 </Button>
-                <StackPanel Orientation="Vertical" Margin="0,0,3,0" VerticalAlignment="Center">
-                    <TextBlock Text="Tracking-Zeit (Sekunden)" FontSize="7" FontFamily="{StaticResource EncodeSansCondensedBold}" Foreground="White" />
-                    <TextBlock x:Name="txt_recordingTime" Text="0" HorizontalAlignment="Center" Foreground="White" Margin="0,5,0,0" />
-                </StackPanel>
             </StackPanel>
         </Border>
     </StackPanel>
