@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Berichtsheft.Dialogs;
+using System;
 using System.Data.SqlTypes;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +36,9 @@ namespace Berichtsheft.UserControls {
         }
 
         private void btn_deleteProject_Click(object sender, RoutedEventArgs e) {
-            if(MessageBox.Show("Willst du das Projekt \"" + txtb_projectName.Text + "\" wirklich löschen?", "Projekt löschen", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+            ModalDialog modalDialog = new ModalDialog("Möchten Sie das Projekt \"" + txtb_projectName.Text + "\" wirklich löschen?", "Projekt löschen", MessageBoxButton.YesNo);
+            modalDialog.ShowDialog();
+            if (modalDialog.Result == MessageBoxResult.Yes) {
                 try {
                     // Load the XML document
                     XmlDocument xmlDoc = new XmlDocument();
@@ -45,7 +48,8 @@ namespace Berichtsheft.UserControls {
                     XmlNode projectNode = xmlDoc.SelectSingleNode("//project[@name='" + txtb_projectName.Text + "']");
 
                     // Remove the project node if found
-                    if (projectNode != null) {
+                    if (projectNode != null)
+                    {
                         XmlNode parentNode = projectNode.ParentNode;
                         parentNode.RemoveChild(projectNode);
                     }
@@ -53,7 +57,9 @@ namespace Berichtsheft.UserControls {
                     // Save the modified XML to a new string
                     xmlDoc.Save(file);
                     chkb_projectActive.IsChecked = true;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     MessageBox.Show("Das Projekt konnte nicht gelöscht werden.\n" + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
