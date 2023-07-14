@@ -93,6 +93,9 @@
     <Compile Include="Dialogs\ReportSummary.xaml.cs">
       <DependentUpon>ReportSummary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AllNotes.xaml.cs">
       <DependentUpon>AllNotes.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,9 @@
     </Compile>
     <Compile Include="SubMainWIndow.xaml.cs">
       <DependentUpon>SubMainWIndow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\IndeterminateProgressBar.xaml.cs">
+      <DependentUpon>IndeterminateProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\NoteUserControls\TextElement.xaml.cs">
       <DependentUpon>TextElement.xaml</DependentUpon>
@@ -160,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\ReportSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\SearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SubMainWIndow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\IndeterminateProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,6 +344,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\summarize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

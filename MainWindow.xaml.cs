@@ -163,5 +163,10 @@ namespace Berichtsheft {
                 }
             } catch { }
         }
+
+        private void btn_search_Click(object sender, RoutedEventArgs e) {
+            SearchWindow searchWindow = new SearchWindow();
+            searchWindow.ShowDialog();
+        }
     }
 }

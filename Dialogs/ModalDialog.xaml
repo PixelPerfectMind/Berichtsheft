@@ -24,7 +24,7 @@
                 <Image x:Name="img_messageBoxImage" Source="/Resources/Icons/lightbulb.png" Width="64" Height="64"/>
                 <TextBlock x:Name="txt_message" Text="Message" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="220" Margin="10,0,0,0" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,0,0,5">
                 <Button x:Name="btn_ok" Content="OK" Click="btn_ok_Click" Width="34" />
                 <Button x:Name="btn_yes" Content="Ja" Width="34" Click="btn_yes_Click" />
                 <Button x:Name="btn_no" Content="Nein" Width="50" Click="btn_no_Click" />
