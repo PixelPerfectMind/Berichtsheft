@@ -55,6 +55,12 @@
                         <Button x:Name="btn_allNotes" Content="Alle Notizen" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="180,0,0,0" Click="btn_allNotes_Click" />
                         <Button x:Name="btn_allProjects" Content="Alle Projekte" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="290,0,0,0" Click="btn_allProjects_Click" />
                         <Button x:Name="btn_dayHistory" Content="Projekt-Tracking" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="134" Margin="400,0,0,0" Click="btn_dayHistory_Click" />
+                        <Button x:Name="btn_search" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Click="btn_search_Click">
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
+                                <Image Source="/Resources/Icons/search.png" VerticalAlignment="Center" Height="18" Width="18" />
+                                <TextBlock Text="Suche" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" FontWeight="Bold" />
+                            </StackPanel>
+                        </Button>
                     </Grid>
 
                     <!-- Content -->

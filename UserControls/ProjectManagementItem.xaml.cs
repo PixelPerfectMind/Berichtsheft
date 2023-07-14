@@ -1,6 +1,5 @@
 ﻿using Berichtsheft.Dialogs;
 using System;
-using System.Data.SqlTypes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
