@@ -1,16 +1,23 @@
-﻿<Application x:Class="Berichtsheft.App"
+<Application x:Class="Berichtsheft.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Berichtsheft"
-             StartupUri="Dialogs/Launch.xaml">
-    <Application.Resources>
-        <ResourceDictionary>
-            <FontFamily x:Key="EncodeSans">pack://application:,,,/Resources/Font/#Encode Sans</FontFamily>
-            <FontFamily x:Key="EncodeSansCondensed">pack://application:,,,/Resources/Font/#Encode Sans Condensed Medium</FontFamily>
-            <FontFamily x:Key="EncodeSansCondensedBold">pack://application:,,,/Resources/Font/#Encode Sans Condensed Bold</FontFamily>
-            <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="Resources/Theme.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-    </Application.Resources>
+             xmlns:local="clr-namespace:Berichtsheft" StartupUri="Dialogs/Launch.xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d1p1:Ignorable="d"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Berichtsheft.ViewModel"
+             >
+  <Application.Resources>
+    <ResourceDictionary>
+      <FontFamily x:Key="EncodeSans">pack://application:,,,/Resources/Font/#Encode Sans</FontFamily>
+      <FontFamily x:Key="EncodeSansCondensed">pack://application:,,,/Resources/Font/#Encode Sans Condensed Medium</FontFamily>
+      <FontFamily x:Key="EncodeSansCondensedBold">pack://application:,,,/Resources/Font/#Encode Sans Condensed Bold</FontFamily>
+      <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Theme.xaml" />
+                <ResourceDictionary>
+                    <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Berichtsheft.ViewModel" />
+                </ResourceDictionary>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>

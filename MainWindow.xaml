@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Berichtsheft"
+        xmlns:local="clr-namespace:Berichtsheft" DataContext="{Binding Main, Source={StaticResource Locator}}"
         mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" WindowStartupLocation="CenterScreen"
-        Title="Berichtsheft" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip" SizeChanged="window_SizeChanged" Activated="window_Activated">
+        Title="{Binding Path=WindowTitle}" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip" SizeChanged="window_SizeChanged" Activated="window_Activated">
     <Border x:Name="brdr_windowBorder" Style="{StaticResource windowBorder}" RenderTransformOrigin="0.5,0.5">
         <Border.RenderTransform>
             <TransformGroup>
@@ -28,7 +28,7 @@
                             <!-- Title bar -->
                             <Grid>
                                 <Image Source="/Resources/Images/berichtsheft.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="6,0,0,0" />
-                                <TextBlock x:Name="txt_windowTitle" Text="Berichtsheft" Style="{StaticResource windowTitleText}" FontFamily="{StaticResource EncodeSansCondensedBold}" MouseDown="txt_windowTitle_MouseDown" />
+                                <TextBlock x:Name="txt_windowTitle" Text="{Binding Path=WindowTitle, Mode=OneWay}" Style="{StaticResource windowTitleText}" FontFamily="{StaticResource EncodeSansCondensedBold}" MouseDown="txt_windowTitle_MouseDown" />
                                 <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" Click="btn_closeWindow_Click">
                                     <Button.Triggers>
                                         <EventTrigger RoutedEvent="Button.Click">
