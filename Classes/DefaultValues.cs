@@ -20,14 +20,14 @@ namespace Berichtsheft.Classes {
         /// In Alpha- and Beta releases.
         /// </summary>
         public DateTime TimeBomb() {
-            return new DateTime(2023, 07, 31);                      // If the current release is a Dev release, change the date to the end of the current month.
+            return new DateTime(2023, 12, 31);                      // If the current release is a Dev release, change the date to the end of the current month.
         }
 
         /// <summary>
         /// Returns the version of the program.
         /// </summary>
         public string ProgramVersion() {
-            return "1.0-amd64-OS-alpha";                            // Return the version string.
+            return "1.1.-amd64-OS-alpha";                            // Return the version string.
         }
     }
 }
