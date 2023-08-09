@@ -14,7 +14,7 @@
                     <ImageBrush ImageSource="/Resources/Images/lookHere.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock Text="Das ist es gewesen!" Foreground="White" Margin="0,10,0,0" TextAlignment="Center" FontWeight="Bold" FontStretch="Condensed" FontSize="24" />
+            <TextBlock Text="Schau' mal unten rechts!" Foreground="White" Margin="0,10,0,0" TextAlignment="Center" FontWeight="Bold" FontStretch="Condensed" FontSize="24" />
             <TextBlock Text="Dein Programm ist nun einsatzbereit." Foreground="White" Margin="0,10,0,0" TextAlignment="Center" />
             <TextBlock Text="Um es zu starten, klicke auf die unscheinbare Schaltfläche unten rechts und dann unter Programmoptionen einblende." TextAlignment="Center" Foreground="White" TextWrapping="Wrap" Width="447" />
         </StackPanel>
