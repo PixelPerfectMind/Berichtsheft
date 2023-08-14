@@ -31,7 +31,7 @@
                     </Button>
                 </Grid>
             </Border>
-            <Grid x:Name="cb_searchFileContents">
+            <Grid>
                 <StackPanel Orientation="Horizontal" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Image Source="/Resources/Icons/search.png" Width="38" Height="38" />
                     <TextBlock Text="Inhalte" FontSize="32" Margin="10,0,10,0"/>
@@ -39,14 +39,12 @@
                 </StackPanel>
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" Width="320">
                     <TextBox x:Name="txt_search" VerticalAlignment="Top" Foreground="White" Height="35" Padding="5,4,0,0" Margin="0,0,91,0" TextChanged="txt_search_TextChanged" />
-                    <CheckBox Content="Datei-Inhalte miteinbeziehen?" ToolTip="Dies kann die Suchgeschwindigkeit verringern" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="0,48,0,0"/>
+                    <CheckBox x:Name="cb_searchFileContents" Content="Datei-Inhalte miteinbeziehen?" ToolTip="Dies kann die Suchgeschwindigkeit verringern" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="0,48,0,0"/>
                     <Button x:Name="btn_search" Content="Suchen" HorizontalAlignment="Right" VerticalAlignment="Top" Width="85" Height="35" Margin="0,0,1,0" Click="btn_search_Click"  />
                 </Grid>
                 <uc:IndeterminateProgressBar x:Name="pb_search" Margin="0,235,0,0" VerticalAlignment="Top" Height="10" Visibility="Collapsed" HorizontalAlignment="Center" Width="320"/>
                 <ScrollViewer HorizontalAlignment="Center" Margin="0,250,0,10" Width="320">
-                    <StackPanel x:Name="sp_searchResults" VerticalAlignment="Top" Height="100" HorizontalAlignment="Center" Width="320">
-                        <TextBlock Text="Keine Ergebnisse" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </StackPanel>
+                    <StackPanel x:Name="sp_searchResults" />
                 </ScrollViewer>
             </Grid>
             <CheckBox x:Name="cb_windowSizeAnimation" Content="Fenster animieren" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
