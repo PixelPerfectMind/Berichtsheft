@@ -29,6 +29,9 @@
                             <Grid>
                                 <Image Source="/Resources/Images/berichtsheft.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="6,0,0,0" />
                                 <TextBlock x:Name="txt_windowTitle" Text="Berichtsheft" Style="{StaticResource windowTitleText}" FontFamily="{StaticResource EncodeSansCondensedBold}" MouseDown="txt_windowTitle_MouseDown" />
+                                <Button x:Name="btn_settings" Style="{StaticResource WindowButton}" Margin="35,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Image Source="/Resources/Icons/settings.png" Width="18" Height="18" />
+                                </Button>
                                 <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" Click="btn_closeWindow_Click">
                                     <Button.Triggers>
                                         <EventTrigger RoutedEvent="Button.Click">

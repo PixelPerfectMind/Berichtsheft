@@ -1,0 +1,25 @@
+﻿<Window x:Class="Berichtsheft.Dialogs.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Berichtsheft.Dialogs"
+        mc:Ignorable="d"
+        Title="Einstellungen" Height="450" Width="800" Style="{StaticResource window}"
+        FontFamily="{StaticResource EncodeSans}" FontSize="16" >
+    <Border Style="{StaticResource windowBorder}">
+        <StackPanel Orientation="Vertical">
+            <Border Style="{StaticResource titleBar}">
+                <Grid>
+                    <Image Source="/Resources/Images/berichtsheft.png" Width="24" Height="24" HorizontalAlignment="Left" Margin="7,0,0,0" />
+                    <TextBlock Text="Einstellungen" Style="{StaticResource windowTitleText}" />
+                    <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" />
+                    <Button x:Name="btn_minimizeWindow" Style="{StaticResource WindowButton}" Content="🗖" Margin="0,0,36,0" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+            <Grid>
+
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>

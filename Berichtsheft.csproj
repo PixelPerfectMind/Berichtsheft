@@ -111,6 +111,9 @@
     <Compile Include="Dialogs\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AllNotes.xaml.cs">
       <DependentUpon>AllNotes.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\SearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -390,6 +397,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\unknown_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
