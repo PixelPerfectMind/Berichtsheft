@@ -13,6 +13,7 @@ namespace Berichtsheft.Dialogs {
         public Settings() {
             InitializeComponent();
             LoadSavedSettings();
+            LoadProgramInformation();
         }
 
         private async void btn_closeWindow_Click(object sender, RoutedEventArgs e) {
@@ -49,6 +50,12 @@ namespace Berichtsheft.Dialogs {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
                 exceptionWindow.ShowDialog();
             }
+        }
+
+        public void LoadProgramInformation() {
+            Classes.DefaultValues defaultValues = new Classes.DefaultValues();
+            txt_versionNumber.Text = defaultValues.ProgramVersion();
+            if(defaultValues.IsDevRelease()) { txt_versionNumber.Text = "Ja"; } else { txt_versionNumber.Text = "Nein";}
         }
 
         /// <summary>

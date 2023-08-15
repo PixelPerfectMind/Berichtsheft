@@ -117,11 +117,16 @@
                         <TextBlock Text="Programminformationen" Margin="5,0,0,0" FontWeight="Bold" FontSize="20" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="24,5,0,0">
-                        
+
                         <!-- Version text -->
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Version:" FontWeight="Bold" />
-                            <TextBlock Text="1" Margin="10,0,0,0" />
+                            <TextBlock x:Name="txt_versionNumber" Text="1" Margin="10,0,0,0" />
+                        </StackPanel>
+                        <!-- Is dev-release -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Entwickler-Release:" FontWeight="Bold" />
+                            <TextBlock x:Name="txt_devRelease" Text="Ja" Margin="10,0,0,0" />
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
