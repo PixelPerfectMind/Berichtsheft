@@ -70,5 +70,17 @@ namespace Berichtsheft.Properties {
                 this["externalBackgroundPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool blurBackground {
+            get {
+                return ((bool)(this["blurBackground"]));
+            }
+            set {
+                this["blurBackground"] = value;
+            }
+        }
     }
 }

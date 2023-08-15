@@ -15,6 +15,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
 
     <!-- Hide the Windows window border -->
     <Style TargetType="Window" x:Key="window">
@@ -40,6 +41,13 @@
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
 
+    <!-- Generic text block -->
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    
     <!-- Normal Button-->
     <Style TargetType="{x:Type Button}" PresentationOptions:Freeze="True">
         <Style.Resources>

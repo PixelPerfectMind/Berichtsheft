@@ -4,9 +4,9 @@ using Berichtsheft.Pages;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Berichtsheft {
 
@@ -22,6 +22,34 @@ namespace Berichtsheft {
                 path = fileActions.path; // Set the path to the root folder
                 fr_main.Content = new Dashboard(); // Set the start page to the frame
                 fileActions.CreateWorkDirectory(); // Create the work directory
+            } catch (Exception ex) {
+                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                exceptionWindow.ShowDialog();
+            }
+            LoadProgramSettings();
+        }
+
+        /// <summary>
+        /// Load the saved settings
+        /// </summary>
+        public void LoadProgramSettings() {
+            // Load the saved settings
+            try {
+                // Load the saved settings
+                if(Properties.Settings.Default.useDashboardBackground) {
+                    if(Properties.Settings.Default.internalBackgroundImage != "") {
+                        img_background.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Backgrounds/" + Properties.Settings.Default.internalBackgroundImage.Replace("img/", "") + ".jpg"));
+                    } else {
+                        try {
+                            img_background.Source = new BitmapImage(new Uri(Properties.Settings.Default.externalBackgroundPath));
+                        } catch { }
+                    }
+                    if(Properties.Settings.Default.blurBackground) {
+                        blr_backgroundImage.Radius = 40;
+                    } else {
+                        blr_backgroundImage.Radius = 0;
+                    }
+                }
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
                 exceptionWindow.ShowDialog();
@@ -134,19 +162,21 @@ namespace Berichtsheft {
         }
 
         private void window_SizeChanged(object sender, SizeChangedEventArgs e) {
-            try {
-                // Check if the height is greater than the width
-                // If so, set the blur radius to 6000 / the width of the window...
-                // If not, set the blur radius to 6000 / the height of the window...
-                // This is to save performance, when the window is resized
-                if(this.Height >= this.Width) {
-                    blr_backgroundImage.Radius = 6000 / this.Width; 
-                } else if(this.Width >= this.Height) {
-                    blr_backgroundImage.Radius = 6000 / this.Height;
+            if (Properties.Settings.Default.blurBackground) {
+                try {
+                    // Check if the height is greater than the width
+                    // If so, set the blur radius to 6000 / the width of the window...
+                    // If not, set the blur radius to 6000 / the height of the window...
+                    // This is to save performance, when the window is resized
+                    if(this.Height >= this.Width) {
+                        blr_backgroundImage.Radius = 6000 / this.Width; 
+                    } else if(this.Width >= this.Height) {
+                        blr_backgroundImage.Radius = 6000 / this.Height;
+                    }
+                } catch (Exception ex) {
+                    ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
+                    exceptionWindow.ShowDialog();
                 }
-            } catch (Exception ex) {
-                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
-                exceptionWindow.ShowDialog();
             }
         }
 
@@ -161,12 +191,18 @@ namespace Berichtsheft {
                     dashboard?.ReloadNoteList();
                     dashboard?.ShowNewestProject();
                 }
+                LoadProgramSettings();
             } catch { }
         }
 
         private void btn_search_Click(object sender, RoutedEventArgs e) {
             SearchWindow searchWindow = new SearchWindow();
             searchWindow.ShowDialog();
+        }
+
+        private void btn_settings_Click(object sender, RoutedEventArgs e) {
+            Settings settings = new Settings();
+            settings.Show();
         }
     }
 }

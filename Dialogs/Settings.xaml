@@ -4,22 +4,138 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft.Dialogs"
+        xmlns:blr="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
         mc:Ignorable="d"
-        Title="Einstellungen" Height="450" Width="800" Style="{StaticResource window}"
-        FontFamily="{StaticResource EncodeSans}" FontSize="16" >
-    <Border Style="{StaticResource windowBorder}">
+        Title="Einstellungen" Height="473" Width="400" Style="{StaticResource window}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+    FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White" Icon="/Resources/Images/berichtsheft.png" >
+    <Border Style="{StaticResource windowBorder}" RenderTransformOrigin="0.5,0.5">
+        <Border.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="windowScale" />
+            </TransformGroup>
+        </Border.RenderTransform>
         <StackPanel Orientation="Vertical">
             <Border Style="{StaticResource titleBar}">
                 <Grid>
                     <Image Source="/Resources/Images/berichtsheft.png" Width="24" Height="24" HorizontalAlignment="Left" Margin="7,0,0,0" />
-                    <TextBlock Text="Einstellungen" Style="{StaticResource windowTitleText}" />
-                    <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" />
-                    <Button x:Name="btn_minimizeWindow" Style="{StaticResource WindowButton}" Content="🗖" Margin="0,0,36,0" VerticalAlignment="Center" />
+                    <TextBlock x:Name="txt_windowTitle" Text="Einstellungen" Style="{StaticResource windowTitleText}" MouseDown="txt_windowTitle_MouseDown" />
+                    <Button x:Name="btn_closeWindow" Style="{StaticResource closeWindowButton}" Click="btn_closeWindow_Click">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button x:Name="btn_maximizeWindow" Style="{StaticResource WindowButton}" Margin="0,0,36,0" Content="🗖" VerticalAlignment="Center" Padding="1,1,1,1" UseLayoutRounding="True" IsEnabled="False" />
+                    <Button x:Name="btn_minimizeWindow" Style="{StaticResource WindowButton}" Margin="0,0,65,0" Content="🗕" VerticalAlignment="Center" Click="btn_minimizeWindow_Click" />
                 </Grid>
             </Border>
-            <Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Icons/color_palette.png" Width="20" />
+                        <TextBlock Text="Darstellung" Margin="5,0,0,0" FontWeight="Bold" FontSize="20" />
+                    </StackPanel>
+                    
+                    <!-- Background image section -->
+                    <StackPanel Orientation="Vertical" Margin="24,5,0,0">
+                        <TextBlock Text="Hintergrundbild" FontWeight="Bold" />
+                        <TextBlock Text="Lege fest, was als Hintergrund auf dem Hauptfenster angezeigt wird" />
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            
+                            <!-- Background image options -->
+                            <StackPanel Orientation="Vertical">
+                                <RadioButton x:Name="rb_background_none" Content="Nichts" GroupName="background" Checked="rb_background_none_Checked" />
+                                <RadioButton x:Name="rb_background_blossoms" Content="Kirschblüten" GroupName="background" Checked="rb_background_blossoms_Checked" />
+                                <RadioButton x:Name="rb_background_geysir" Content="Geysir" GroupName="background" Checked="rb_background_geysir_Checked" />
+                                <RadioButton x:Name="rb_background_wtrfall1" Content="Wasserfall 1" GroupName="background" Checked="rb_background_wtrfall1_Checked" />
+                                <RadioButton x:Name="rb_background_wtrfall2" Content="Wasserfall 2" GroupName="background" Checked="rb_background_wtrfall2_Checked" />
+                                <RadioButton x:Name="rb_background_custom" Content="Eigenes Bild" GroupName="background" Checked="rb_background_custom_Checked" />
+                            </StackPanel>
+                            
+                            <!-- Background image preview window -->
+                            <Border Margin="24,0,0,0" CornerRadius="5" Width="192" Height="108">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <LinearGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="-45" CenterX="0.5" CenterY="0.5"/>
+                                            </TransformGroup>
+                                        </LinearGradientBrush.RelativeTransform>
+                                        <GradientStop Color="Black" Offset="1"/>
+                                        <GradientStop Color="#FF303030" Offset="0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid Margin="5">
+                                    <Image x:Name="img_backgroundPreview" Opacity=".5" Source="/Resources/Images/Backgrounds/blossoms.jpg" Width="192" Height="108" Stretch="UniformToFill" >
+                                        <Image.Effect>
+                                            <BlurEffect Radius="0" x:Name="blr_previewImage"/>
+                                        </Image.Effect>
+                                    </Image>
+                                    <Border Background="Black" Height="20" VerticalAlignment="Top">
+                                        <Border.Effect>
+                                            <DropShadowEffect Direction="270" BlurRadius="2" ShadowDepth="1"/>
+                                        </Border.Effect>
+                                        <blr:BlurryUserControl BlurContainer="{Binding ElementName=img_backgroundPreview}" BlurRadius="5" Background="#7F00A3AE" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="15" Margin="5,7,0,7" Background="White" CornerRadius="3" />
+                                                <Border Width="30" Margin="5,7,0,7" Background="White" CornerRadius="3" />
+                                                <Border Width="20" Margin="5,7,0,7" Background="White" CornerRadius="3" />
+                                            </StackPanel>
+                                        </blr:BlurryUserControl>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                        <CheckBox x:Name="cb_useBlurEffect" Content="Blur-Effekt aktivieren" Margin="0,5,0,0" Checked="cb_useBlurEffect_Checked" Unchecked="cb_useBlurEffect_Unchecked">
+                            <CheckBox.Triggers>
+                                <EventTrigger RoutedEvent="CheckBox.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="blr_previewImage" Storyboard.TargetProperty="(BlurEffect.Radius)" To="5" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="CheckBox.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="blr_previewImage" Storyboard.TargetProperty="(BlurEffect.Radius)" To="0" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </CheckBox.Triggers>
+                        </CheckBox>
+                        <TextBlock Text="Der Hintergrund wird weichgezeichnet, um die Lesbarkeit zu erhöhen. Diese Option kann sich auf die Leistung auswirken." FontSize="12" Margin="20,0,0,0" />
+                    </StackPanel>
 
-            </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Image Source="/Resources/Icons/info.png" Width="20" />
+                        <TextBlock Text="Programminformationen" Margin="5,0,0,0" FontWeight="Bold" FontSize="20" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="24,5,0,0">
+                        
+                        <!-- Version text -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Version:" FontWeight="Bold" />
+                            <TextBlock Text="1" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </StackPanel>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Window.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="0.9" To="1" Duration="0:0:0.07" />
+                        <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.1" To="1" Duration="0:0:0.1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
     </Border>
 </Window>
