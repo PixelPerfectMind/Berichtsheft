@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Berichtsheft.UserControls.NoteUserControls"
              mc:Ignorable="d" >
-    <Grid x:Name="grd_main" Background="Transparent" Width="290" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
-        <Border x:Name="brdr_highlight" Visibility="Collapsed" >
+    <Grid x:Name="grd_main" Background="Transparent" Width="310" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
+        <Border x:Name="brdr_highlight" Visibility="Collapsed" CornerRadius="5" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <LinearGradientBrush.RelativeTransform>
