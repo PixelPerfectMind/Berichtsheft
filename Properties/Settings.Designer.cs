@@ -37,7 +37,7 @@ namespace Berichtsheft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool useDashboardBackground {
             get {
                 return ((bool)(this["useDashboardBackground"]));
@@ -49,7 +49,7 @@ namespace Berichtsheft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("img/blossom")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string internalBackgroundImage {
             get {
                 return ((string)(this["internalBackgroundImage"]));
@@ -73,7 +73,7 @@ namespace Berichtsheft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool blurBackground {
             get {
                 return ((bool)(this["blurBackground"]));

@@ -55,7 +55,7 @@ namespace Berichtsheft.Dialogs {
         public void LoadProgramInformation() {
             Classes.DefaultValues defaultValues = new Classes.DefaultValues();
             txt_versionNumber.Text = defaultValues.ProgramVersion();
-            if(defaultValues.IsDevRelease()) { txt_versionNumber.Text = "Ja"; } else { txt_versionNumber.Text = "Nein";}
+            if(defaultValues.IsDevRelease()) { txt_devRelease.Text = "Ja"; } else { txt_devRelease.Text = "Nein";}
         }
 
         /// <summary>
