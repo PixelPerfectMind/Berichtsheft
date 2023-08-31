@@ -53,6 +53,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BlurryControls, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\BlurryControls.1.0.24\lib\net452\BlurryControls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -110,6 +113,9 @@
     </Compile>
     <Compile Include="Dialogs\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AllNotes.xaml.cs">
       <DependentUpon>AllNotes.xaml</DependentUpon>
@@ -188,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\SearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,6 +307,7 @@
     </EmbeddedResource>
     <None Include=".editorconfig" />
     <None Include="app.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -353,10 +364,10 @@
     <Resource Include="Resources\Images\Backgrounds\geysir.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Backgrounds\waterfall.jpg" />
+    <Resource Include="Resources\Images\Backgrounds\wtrfall2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Backgrounds\godafoss-waterfall.png" />
+    <Resource Include="Resources\Images\Backgrounds\wtrfall1.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\title.png" />
@@ -390,6 +401,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\unknown_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\color_palette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

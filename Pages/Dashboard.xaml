@@ -13,10 +13,8 @@
         <TextBlock x:Name="txt_currentlyYouWorkAtThis" Text="Aktuell arbeitest du an diesem Projekt:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,100,0,0"/>
         <TextBlock x:Name="txt_currentProject" Text="Aktuell wird anscheinend kein Projekt bearbeitet" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,125,0,0"/>
         <TextBlock Text="Aktuelle Notizen:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,210,0,0"/>
-        <StackPanel x:Name="sp" Orientation="Vertical" Margin="24,242,10,0" Height="159" VerticalAlignment="Top" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,406,0,0" >
-            <Button Content="Neu..." Width="70" />
-            <Button Content="Alle Notizen" Width="110"/>
-        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Margin="24,242,10,24">
+            <StackPanel x:Name="sp" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,406,0,0" />
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -27,7 +27,7 @@ namespace Berichtsheft.Classes {
         /// Returns the version of the program.
         /// </summary>
         public string ProgramVersion() {
-            return "1.1.-amd64-OS-alpha";                            // Return the version string.
+            return "1.2-amd64-OS-alpha";                            // Return the version string.
         }
     }
 }
