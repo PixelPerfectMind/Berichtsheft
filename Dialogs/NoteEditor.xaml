@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Berichtsheft.Dialogs"
         mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White" ShowInTaskbar="False"
-        Title="Notiz-Editor" Height="441" Width="320" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated">
-    <StackPanel Orientation="Vertical">
+        Title="Notiz-Editor" Height="441" Width="340" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated">
+    <StackPanel Orientation="Vertical" Margin="0,0,0,-38">
         <!-- Edit options box -->
         <Border x:Name="brdr_editor" Style="{StaticResource windowBorder}" Height="130" RenderTransformOrigin="0.5,0">
             <Border.RenderTransform>
@@ -67,7 +67,7 @@
         </Border>
 
         <!-- Note sheet -->
-        <Border x:Name="brdr_postit" CornerRadius="3" Background="#FFFAE75C" Height="261" Margin="10,0,10,0">
+        <Border x:Name="brdr_postit" CornerRadius="3" Background="#FFFAE75C" Height="300" Margin="10,0,10,0">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.5" ShadowDepth="2" Direction="270" BlurRadius="8"/>
             </Border.Effect>
@@ -90,7 +90,7 @@
                     <Button x:Name="btn_openEditor" Content="✎" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,36,0" Padding="1,0,1,0" Background="{x:Null}" Width="22" Click="btn_openEditor_Click" Foreground="Black" />
                     <Button x:Name="btn_closeNote" Content="🗙" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Margin="0,0,9,0" Style="{StaticResource closeWindowButton}" Width="22" Foreground="Black" Background="{x:Null}" Click="btn_closeNote_Click" />
                 </Grid>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Padding="5,5,5,0" Height="214">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Padding="5,5,5,0" Height="252">
                     <StackPanel Orientation="Vertical" x:Name="contents" />
                 </ScrollViewer>
             </StackPanel>
