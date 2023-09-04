@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Berichtsheft.Dialogs.Notes"
              mc:Ignorable="d"  FontFamily="{StaticResource EncodeSans}" FontSize="18">
-    <StackPanel x:Name="sp" Cursor="Hand" Orientation="Horizontal" Margin="0,5,0,5" Background="#02000000" MouseDown="sp_MouseDown">
-        <Ellipse x:Name="ell" Width="20" Height="20" Fill="Green" Margin="0,0,10,0" Stroke="DarkGreen" StrokeThickness="3"/>
-        <TextBlock x:Name="txt" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-    </StackPanel>
+    <Button x:Name="btn_item" Width="100" Height="80" Click="btn_item_Click" Background="#7F00A3AE">
+        <StackPanel Orientation="Vertical" MaxWidth="80">
+            <Ellipse x:Name="ell" Width="20" Height="20" Fill="Green" Margin="0,0,0,5" Stroke="DarkGreen" StrokeThickness="3"/>
+            <TextBlock x:Name="txt" Text="Placeholder" TextWrapping="Wrap" FontSize="14" FontFamily="{StaticResource EncodeSans}" />
+        </StackPanel>
+    </Button>
 </UserControl>

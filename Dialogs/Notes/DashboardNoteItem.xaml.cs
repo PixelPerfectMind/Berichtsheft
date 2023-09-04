@@ -20,7 +20,7 @@ namespace Berichtsheft.Dialogs.Notes {
                 darkerVariant.R, darkerVariant.G, darkerVariant.B));                                                // Set the border color
         }
 
-        private void sp_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+        private void btn_item_Click(object sender, System.Windows.RoutedEventArgs e) {
             try {
                 NoteEditor noteEditor = new NoteEditor(txt.Text);
                 noteEditor.Show();
