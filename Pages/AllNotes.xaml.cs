@@ -1,5 +1,6 @@
 ﻿using Berichtsheft.Classes;
 using Berichtsheft.Dialogs;
+using Berichtsheft.UserControls;
 using System;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using System.Xml;
 
 namespace Berichtsheft.Pages {
@@ -33,25 +35,25 @@ namespace Berichtsheft.Pages {
         /// <summary>
         /// This method reloads the list which contains all notes.
         /// </summary>
-        public void ReloadNoteList() {
+        public async void ReloadNoteList() {
+            int noteIndex = 0;
             try {
-                lb_allNotes.Items.Clear();
+                sp_myNotes.Children.Clear();
                 foreach(var notes in Directory.GetFiles(path)) {
                     string note = notes.Replace(path + @"\", "");                                                                   // Remove the path from the note file name
-                    note = note.Replace(".xml", "");                                                                                // Remove the file extension
-                    lb_allNotes.Items.Add(note);
-                }
-            } catch (Exception ex) {
-                ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
-                exceptionWindow.ShowDialog();
-            }
-        }
+                    note = note.Replace(".xml", "");
 
-        private void lb_allNotes_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            try {
-                if(lb_allNotes.SelectedIndex != -1) {
-                    NoteEditor noteEditor = new NoteEditor(lb_allNotes.SelectedItem.ToString());
-                    noteEditor.Show();
+                    if (noteIndex == 0) {
+                        sp_myNotes.Children.Add(new NoteOverviewItem(note, 0));
+                    } else if (noteIndex == Directory.GetFiles(path).Length) {
+                        sp_myNotes.Children.Add(new NoteOverviewItem(note, 2));
+                    } else {
+                        sp_myNotes.Children.Add(new NoteOverviewItem(note));
+                    }
+                    
+                    noteIndex++;
+
+                    await Task.Delay(90);                                                                                           // 10ms delay to finish the animation
                 }
             } catch (Exception ex) {
                 ExceptionWindow exceptionWindow = new ExceptionWindow(ex);
@@ -113,6 +115,47 @@ namespace Berichtsheft.Pages {
             }
             cb_showNoteCreationDialog.IsChecked = false;
             ReloadNoteList();
+        }
+
+        /// <summary>
+        /// Shows and hides the scroll indicators
+        /// </summary>
+        private void scr_ScrollChanged(object sender, ScrollChangedEventArgs e) {
+
+            // For the top border
+            if (scr.VerticalOffset == 0) {
+                // Height animation border to 0
+                DoubleAnimation heightAnimation = new DoubleAnimation {
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_topScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            } else if (scr.VerticalOffset > 0) {
+                // Height animation border to 10
+                DoubleAnimation heightAnimation = new DoubleAnimation {
+                    To = 20,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_topScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            }
+
+            // For the bottom border
+            if (scr.VerticalOffset == scr.ScrollableHeight) {
+                // Height animation border to 0
+                DoubleAnimation heightAnimation = new DoubleAnimation {
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_bottomScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            } else if (scr.VerticalOffset < scr.ScrollableHeight) {
+                // Height animation border to 10
+                DoubleAnimation heightAnimation = new DoubleAnimation
+                {
+                    To = 20,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_bottomScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            }
         }
     }
 }

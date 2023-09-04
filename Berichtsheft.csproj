@@ -141,6 +141,9 @@
     <Compile Include="UserControls\IndeterminateProgressBar.xaml.cs">
       <DependentUpon>IndeterminateProgressBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\NoteOverviewItem.xaml.cs">
+      <DependentUpon>NoteOverviewItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\NoteUserControls\TextElement.xaml.cs">
       <DependentUpon>TextElement.xaml</DependentUpon>
     </Compile>
@@ -258,6 +261,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\IndeterminateProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NoteOverviewItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -413,6 +420,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\ic_home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\add_note.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,9 +8,40 @@
       d:DesignHeight="450" d:DesignWidth="800" FontFamily="{StaticResource EncodeSans}" FontSize="16" Foreground="White"
       Title="Alle Notizen">
     <Grid x:Name="grd_main">
-        <TextBlock Text="Alle Notizen" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,24,0,0" FontSize="24" FontWeight="Bold"/>
-        <Button x:Name="btn_newNote" Content="Neue Notiz" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,22,24,0" Width="100" Click="btn_newNote_Click"/>
-        <ListBox x:Name="lb_allNotes" Margin="24,61,24,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionChanged="lb_allNotes_SelectionChanged" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,26,0,0">
+            <Image Source="/Resources/Icons/sticky_note.png" Height="24" />
+            <TextBlock Text="Alle Notizen" FontFamily="{StaticResource EncodeSans}" FontSize="24" Margin="5,0,0,0" FontWeight="Bold" FontStretch="Condensed" />
+        </StackPanel>
+
+        <Button x:Name="btn_newNote" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,22,24,0" Width="120" Click="btn_newNote_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Icons/add_note.png" Height="24" Width="24" />
+                <TextBlock Text="Neue Notiz" VerticalAlignment="Center" Margin="5,0,0,0" />
+            </StackPanel>
+        </Button>
+        <Border CornerRadius="15" Padding="5" Background="#7F000000" Margin="24,70,24,24">
+            <ScrollViewer x:Name="scr" ScrollChanged="scr_ScrollChanged" VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="sp_myNotes" Orientation="Vertical" />
+            </ScrollViewer>
+        </Border>
+        <Border x:Name="brdr_topScrollIndicator" Margin="24,70,24,0" Height="20" CornerRadius="15,15,0,0" VerticalAlignment="Top" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF00A3AE"/>
+                    <GradientStop Color="#0000A3AE" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Border x:Name="brdr_bottomScrollIndicator" Margin="24,0,24,24" Height="20" CornerRadius="0,0,15,15" VerticalAlignment="Bottom" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#0000A3AE"/>
+                    <GradientStop Color="#FF00A3AE" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
         <Border x:Name="brdr_newNoteDialog" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" MouseDown="brdr_newNoteDialog_MouseDown" Background="#02000000">
             <Border.RenderTransform>
                 <TransformGroup>
