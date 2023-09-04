@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using System.Xml;
 
 namespace Berichtsheft.Pages {
@@ -67,6 +68,45 @@ namespace Berichtsheft.Pages {
             sp_myProjects.Children.Clear();
             ReadProjectsFromXML();
             AddToList();
+        }
+
+        /// <summary>
+        /// Hides and shows the scroll indicators
+        /// </summary>
+        private void scr_ScrollChanged(object sender, ScrollChangedEventArgs e) {
+            // For the top border
+            if(scr.VerticalOffset == 0) {
+                // Height animation border to 0
+                DoubleAnimation heightAnimation = new DoubleAnimation {
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_topScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            } else if(scr.VerticalOffset > 0) {
+                // Height animation border to 10
+                DoubleAnimation heightAnimation = new DoubleAnimation {
+                    To = 20,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_topScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            }
+
+            // For the bottom border
+            if(scr.VerticalOffset == scr.ScrollableHeight) {
+                // Height animation border to 0
+                DoubleAnimation heightAnimation = new DoubleAnimation {
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_bottomScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            } else if(scr.VerticalOffset < scr.ScrollableHeight) {
+                // Height animation border to 10
+                DoubleAnimation heightAnimation = new DoubleAnimation  {
+                    To = 20,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.1))
+                };
+                brdr_bottomScrollIndicator.BeginAnimation(Border.HeightProperty, heightAnimation);
+            }
         }
     }
 }

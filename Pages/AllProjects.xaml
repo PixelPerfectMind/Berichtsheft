@@ -8,15 +8,40 @@
       d:DesignHeight="450" d:DesignWidth="800" Foreground="White"
       Title="Dashboard" FontFamily="{StaticResource EncodeSans}" FontSize="16">
     <Grid>
-        <TextBlock Text="Meine Projekte" FontFamily="{StaticResource EncodeSansCondensedBold}" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,26,0,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,26,0,0">
+            <Image Source="/Resources/Icons/category.png" Height="24" />
+            <TextBlock Text="Alle Projekte" FontFamily="{StaticResource EncodeSans}" FontSize="24" Margin="5,0,0,0" FontWeight="Bold" FontStretch="Condensed" />
+        </StackPanel>
+
         <Button x:Name="btn_newProject" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,22,24,0" Width="140" Click="btn_newProject_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Resources/Icons/new_project_white.png" Width="21" Height="22" />
                 <TextBlock Text="Neues Projekt"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,1,0,0"/>
             </StackPanel>
         </Button>
-        <ScrollViewer Margin="24,61,24,24">
-            <StackPanel x:Name="sp_myProjects" Orientation="Vertical" />
-        </ScrollViewer>
+
+        <Border CornerRadius="15" Padding="5" Background="#7F000000" Margin="24,70,24,24">
+            <ScrollViewer x:Name="scr" ScrollChanged="scr_ScrollChanged" VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="sp_myProjects" Orientation="Vertical" />
+            </ScrollViewer>
+        </Border>
+
+        <Border x:Name="brdr_topScrollIndicator" Margin="24,70,24,0" Height="20" CornerRadius="15,15,0,0" VerticalAlignment="Top" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF00A3AE"/>
+                    <GradientStop Color="#0000A3AE" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border x:Name="brdr_bottomScrollIndicator" Margin="24,0,24,24" Height="20" CornerRadius="0,0,15,15" VerticalAlignment="Bottom" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#0000A3AE"/>
+                    <GradientStop Color="#FF00A3AE" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
     </Grid>
 </Page>

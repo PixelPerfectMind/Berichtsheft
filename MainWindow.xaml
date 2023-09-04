@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:blr="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
         xmlns:local="clr-namespace:Berichtsheft"
         mc:Ignorable="d" Style="{StaticResource window}" FontFamily="{StaticResource EncodeSans}" FontSize="16" WindowStartupLocation="CenterScreen"
         Title="Berichtsheft" Height="450" Width="800" Icon="/Resources/Images/berichtsheft_big.png" ResizeMode="CanResizeWithGrip" SizeChanged="window_SizeChanged" Activated="window_Activated">
@@ -13,9 +14,9 @@
             </TransformGroup>
         </Border.RenderTransform>
         <Grid>
-            <Image x:Name="img_background" Stretch="UniformToFill" Opacity="0.25" >
+            <Image x:Name="img_background" Stretch="UniformToFill" Opacity="0.25" Source="/Resources/Images/Backgrounds/geysir.jpg" >
                 <Image.Effect>
-                    <BlurEffect x:Name="blr_backgroundImage" Radius="25"/>
+                    <BlurEffect x:Name="blr_backgroundImage" Radius="0"/>
                 </Image.Effect>
             </Image>
             <!-- Grid for the BlurView -->
@@ -51,20 +52,42 @@
                         </Grid>
                     </Border>
 
+
                     <!-- Navigation bar -->
                     <Grid x:Name="grd_navBar" Margin="0,37,0,0" Background="#FF00a3ae" Height="50" VerticalAlignment="Top">
-                        <Button x:Name="btn_start" Content="Start" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,0,0,0" Click="btn_start_Click" />
-                        <Button x:Name="btn_allEntries" Content="Alle Einträge" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="70,0,0,0" Click="btn_allEntries_Click" />
-                        <Button x:Name="btn_allNotes" Content="Alle Notizen" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="180,0,0,0" Click="btn_allNotes_Click" />
-                        <Button x:Name="btn_allProjects" Content="Alle Projekte" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="110" Margin="290,0,0,0" Click="btn_allProjects_Click" />
-                        <Button x:Name="btn_dayHistory" Content="Projekt-Tracking" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="134" Margin="400,0,0,0" Click="btn_dayHistory_Click" />
-                        <Button x:Name="btn_search" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Click="btn_search_Click">
-                            <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
-                                <Image Source="/Resources/Icons/search.png" VerticalAlignment="Center" Height="18" Width="18" />
-                                <TextBlock Text="Suche" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" FontWeight="Bold" />
-                            </StackPanel>
-                        </Button>
                     </Grid>
+
+
+                    <Border Margin="0,37,0,0" Height="50" VerticalAlignment="Top" Background="Black">
+                        <blr:BlurryUserControl BlurContainer="{Binding ElementName=img_background}" BlurRadius="25" Magnification="0.2" Background="#7200A3AE">
+                            <Grid>
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,105,0">
+
+                                        <Button x:Name="btn_start" ToolTip="Start" Height="34" Width="34" Margin="10,0,0,0" Click="btn_start_Click">
+                                            <Image Source="/Resources/Icons/ic_home.png" Height="24" />
+                                        </Button>
+
+                                        <Button x:Name="btn_allEntries" Content="Alle Einträge" Height="34" Width="110" Margin="10,0,0,0" Click="btn_allEntries_Click" />
+                                        <Button x:Name="btn_allNotes" Content="Alle Notizen" Height="34" Width="100" Margin="10,0,0,0" Click="btn_allNotes_Click" />
+                                        <Button x:Name="btn_allProjects" Content="Alle Projekte" Height="34" Width="110" Margin="10,0,0,0" Click="btn_allProjects_Click" />
+
+                                        <Button x:Name="btn_dayHistory" ToolTip="Projekt-Tracking" Height="34" Width="34" Margin="10,0,0,0" Click="btn_dayHistory_Click" >
+                                            <Image Source="/Resources/Icons/timeline_white.png" Height="24" />
+                                        </Button>
+
+                                    </StackPanel>
+                                </ScrollViewer>
+
+                                <Button x:Name="btn_search" ToolTip="Suche" Margin="0,8,10,8" Click="btn_search_Click" HorizontalAlignment="Right" Width="34">
+                                    <Image Source="/Resources/Icons/search.png" VerticalAlignment="Center" Height="18" Width="18" />
+                                </Button>
+                            </Grid>
+                        </blr:BlurryUserControl>
+                        <Border.Effect>
+                            <DropShadowEffect Direction="270" ShadowDepth="5" BlurRadius="10" Opacity="0.25" />
+                        </Border.Effect>
+                    </Border>
 
                     <!-- Content -->
                     <Frame x:Name="fr_main" Margin="0,87,0,0" NavigationUIVisibility="Hidden" />
